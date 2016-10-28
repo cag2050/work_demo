@@ -45,7 +45,7 @@
     $(function () {
         var $li = $('.tab .p1 a');
         var $ul = $('#content ul');
-        $li.click(function () {
+        $li.on("mouseover",function () {
             var $this = $(this);
             var $t = $this.index();
             $li.removeClass();
