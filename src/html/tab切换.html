@@ -4,14 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        .show {
-            display: block;
-        }
-
-        .hide {
-            display: none;
-        }
-
         .active {
             color: red;
         }
@@ -26,17 +18,18 @@
 <div class="page-1 hide">page-1</div>
 <div class="page-2 hide">page-2</div>
 <script>
-    $(function () {
-        var $tabs = $('[data-pageindex]'); // 选取切换tab
-        var contents = $("[class^='page-']"); // 选取切换content
-        $tabs.on("mouseover", function () {
+    var tab = function (action, tabs, contents, tabs_class) {
+        tabs.on(action, function () {
             var index = $(this).index();
-            $tabs.removeClass('active');
-            $(this).addClass('active');
-            contents.removeClass("show").addClass("hide");
-            contents.eq(index).removeClass("hide").addClass("show");
+            tabs.removeClass(tabs_class);
+            $(this).addClass(tabs_class);
+            contents.hide();
+            contents.eq(index).show();
         })
-    })
+    };
+    var tabs = $('[data-pageindex]'); // 选取切换tab
+    var contents = $("[class^='page-']"); // 选取切换content
+    tab("mouseover", tabs, contents, "active");
 </script>
 </body>
 </html>
