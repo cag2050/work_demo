@@ -35,6 +35,7 @@
     <div class="page-2 hide">page-2</div>
 </div>
 <script>
+    // tab只有一遍
     var tabsSwitch = function (action, tabs, contents, tabs_class) {
         tabs.on(action, function () {
             var index = $(this).index();
@@ -44,13 +45,16 @@
             contents.eq(index).show();
         })
     };
+    // tab有1遍或2遍
     var tabsSwitch2 = function (action, tabs1, tabs2, contents, tabs_class) {
         tabs1.on(action, function () {
             var index = $(this).index();
             tabs1.removeClass(tabs_class);
             $(this).addClass(tabs_class);
-            tabs2.removeClass(tabs_class);
-            tabs2.eq(index).addClass(tabs_class);
+            if (tabs2) {
+                tabs2.removeClass(tabs_class);
+                tabs2.eq(index).addClass(tabs_class);
+            }
             contents.hide();
             contents.eq(index).show();
         })
@@ -58,10 +62,10 @@
     var tabs1 = $("#tab1").find('[data-pageindex]'); // 选取切换tab
     var tabs2 = $("#tab2").find('[data-pageindex]'); // 选取切换tab
     var contents = $("[class^='page-']"); // 选取切换content
-    //        tabsSwitch("mouseover", tabs1, contents, "active");
-    //        tabsSwitch("mouseover", tabs2, contents, "active");
-    tabsSwitch2("mouseover", tabs1, tabs2, contents, "active");
-    tabsSwitch2("mouseover", tabs2, tabs1, contents, "active");
+//    tabsSwitch("mouseover", tabs1, contents, "active");
+//    tabsSwitch2("mouseover", tabs1, null, contents, "active");
+        tabsSwitch2("mouseover", tabs1, tabs2, contents, "active");
+        tabsSwitch2("mouseover", tabs2, tabs1, contents, "active");
 </script>
 </body>
 </html>
