@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active {
+            color: red;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+<div id="tab1">
+    <a data-pageindex="0" class="active">tab0</a>
+    <a data-pageindex="1">tab1</a>
+    <a data-pageindex="2">tab2</a>
+</div>
+<div id="tab2">
+    <a data-pageindex="0" class="active">tab0</a>
+    <a data-pageindex="1">tab1</a>
+    <a data-pageindex="2">tab2</a>
+</div>
+<div>
+    <div class="page-0 show">page-0</div>
+    <div class="page-1 hide">page-1</div>
+    <div class="page-2 hide">page-2</div>
+</div>
+<script>
+    var tabsSwitch = function (action, tabs, contents, tabs_class) {
+        tabs.on(action, function () {
+            var index = $(this).index();
+            tabs.removeClass(tabs_class);
+            $(this).addClass(tabs_class);
+            contents.hide();
+            contents.eq(index).show();
+        })
+    };
+    var tabsSwitch2 = function (action, tabs1, tabs2, contents, tabs_class) {
+        tabs1.on(action, function () {
+            var index = $(this).index();
+            tabs1.removeClass(tabs_class);
+            $(this).addClass(tabs_class);
+            tabs2.removeClass(tabs_class);
+            tabs2.eq(index).addClass(tabs_class);
+            contents.hide();
+            contents.eq(index).show();
+        })
+    };
+    var tabs1 = $("#tab1").find('[data-pageindex]'); // 选取切换tab
+    var tabs2 = $("#tab2").find('[data-pageindex]'); // 选取切换tab
+    var contents = $("[class^='page-']"); // 选取切换content
+    //        tabsSwitch("mouseover", tabs1, contents, "active");
+    //        tabsSwitch("mouseover", tabs2, contents, "active");
+    tabsSwitch2("mouseover", tabs1, tabs2, contents, "active");
+    tabsSwitch2("mouseover", tabs2, tabs1, contents, "active");
+</script>
+</body>
+</html>

@@ -7,16 +7,28 @@
         .active {
             color: red;
         }
+
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
     </style>
     <script src="../js/lib/jquery.min.js"></script>
 </head>
 <body>
-<a data-pageindex="0" class="active">0</a>
-<a data-pageindex="1">1</a>
-<a data-pageindex="2">2</a>
-<div class="page-0 show">page-0</div>
-<div class="page-1 hide">page-1</div>
-<div class="page-2 hide">page-2</div>
+<div>
+    <a data-pageindex="0" class="active">tab0</a>
+    <a data-pageindex="1">tab1</a>
+    <a data-pageindex="2">tab2</a>
+</div>
+<div>
+    <div class="page-0 show">page-0</div>
+    <div class="page-1 hide">page-1</div>
+    <div class="page-2 hide">page-2</div>
+</div>
 <script>
     var tab = function (action, tabs, contents, tabs_class) {
         tabs.on(action, function () {
