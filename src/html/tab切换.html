@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+<a data-pageindex="0" class="active">0</a>
+<a data-pageindex="1">1</a>
+<a data-pageindex="2">2</a>
+<div class="page-0 show">page-0</div>
+<div class="page-1 hide">page-1</div>
+<div class="page-2 hide">page-2</div>
+<script>
+    var tab = function (action, tabs, contents, tabs_class) {
+        tabs.on(action, function () {
+            var index = $(this).index();
+            tabs.removeClass(tabs_class);
+            $(this).addClass(tabs_class);
+            contents.hide();
+            contents.eq(index).show();
+        })
+    };
+    var tabs = $('[data-pageindex]'); // 选取切换tab
+    var contents = $("[class^='page-']"); // 选取切换content
+    tab("mouseover", tabs, contents, "active");
+</script>
+</body>
+</html>
