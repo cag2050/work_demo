@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .active {
+            color: red;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <a data-pageindex="0" class="active">0</a>
+    <a data-pageindex="1">1</a>
+    <a data-pageindex="2">2</a>
+</div>
+<div>
+    <div class="page-0 show">page-0</div>
+    <div class="page-1 hide">page-1</div>
+    <div class="page-2 hide">page-2</div>
+</div>
+<script>
+    var tabSwitch = function (action, tabs, contents, tabs_class) {
+        tabs.on(action, function () {
+            tabs.addClass(tabs_class).siblings().removeClass(tabs_class);
+            contents.show().siblings().hide();
+        })
+    };
+    
+    var tabs1 = $("[data-pageindex='0']"); // 选取切换tab
+    var tabs2 = $("[data-pageindex='1']"); // 选取切换tab
+    var tabs3 = $("[data-pageindex='2']"); // 选取切换tab
+    var content1 = $(".page-0");
+    var content2 = $(".page-1");
+    var content3 = $(".page-2");
+
+    tabSwitch("mouseover", tabs1, content1, "active");
+    tabSwitch("mouseover", tabs2, content2, "active");
+    tabSwitch("mouseover", tabs3, content3, "active");
+</script>
+</body>
+</html>

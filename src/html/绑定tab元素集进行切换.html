@@ -7,6 +7,12 @@
         .active {
             color: red;
         }
+        .show {
+            display: block;
+        }
+        .hide {
+            display: none;
+        }
     </style>
     <script src="../js/lib/jquery.min.js"></script>
 </head>
@@ -18,7 +24,7 @@
 <div class="page-1 hide">page-1</div>
 <div class="page-2 hide">page-2</div>
 <script>
-    var tab = function (action, tabs, contents, tabs_class) {
+    var tabSwitch = function (action, tabs, contents, tabs_class) {
         tabs.on(action, function () {
             var index = $(this).index();
             tabs.removeClass(tabs_class);
@@ -27,9 +33,10 @@
             contents.eq(index).show();
         })
     };
-    var tabs = $('[data-pageindex]'); // 选取切换tab
-    var contents = $("[class^='page-']"); // 选取切换content
-    tab("mouseover", tabs, contents, "active");
+    var tabs = $('[data-pageindex]'); // 选取切换tabs
+    var contents = $("[class^='page-']"); // 选取切换contents
+    console.log(tabs);
+    tabSwitch("mouseover", tabs, contents, "active");
 </script>
 </body>
 </html>
