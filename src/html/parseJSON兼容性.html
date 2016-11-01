@@ -8,7 +8,8 @@
 <body>
 <script>
     var str = '{"name":"jeff","age":"30"}';
-    var json = $.parseJSON(str);
+//    var json = $.parseJSON(str);
+    var json = JSON.parse(str);
     document.write("json.name = " + json.name);
 </script>
 </body>
