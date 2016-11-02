@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function handleJson(jsonString) {
+        try {
+            var json = (new Function("return " + jsonString))();
+            return json;
+        } catch (e) {
+            console.log(e);
+            return null
+        }
+    }
+    var str = '{name:"jeff", age: 30}';
+    var json = handleJson(str);
+    console.log(json);
+    document.write("json.name = " + handleJson(str).name);
+</script>
+</body>
+</html>
