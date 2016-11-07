@@ -4,13 +4,13 @@
 var gulp = require("gulp");
 var browserSync = require("browser-sync").create();
 var reload = browserSync.reload;
-// ¾²Ì¬·şÎñÆ÷
+// é™æ€æœåŠ¡å™¨
 gulp.task("browser-sync", function () {
     browserSync.init({
-        //files: "./src/html/*.html,./src/css/*.css,./src/js/*.js,./src/*.*", // ¼à¿ØµÄÎÄ¼ş
-        files: "./src/**/*.*", // ¼à¿ØµÄÎÄ¼ş
+        //files: "./src/html/*.html,./src/css/*.css,./src/js/*.js,./src/*.*", // ç›‘æ§çš„æ–‡ä»¶
+        files: "./src/**/*.*", // ç›‘æ§çš„æ–‡ä»¶
         server: {
-            baseDir: "./src" // ¸ùÂ·¾¶¡£Èô¸ùÂ·¾¶ÓĞindex.html,¾Í´ò¿ª£»Ã»ÓĞµÄ»°£¬ĞèÒª×Ô¼º²¹³äÍøÖ·¡£
+            baseDir: "./src" // æ ¹è·¯å¾„ã€‚è‹¥æ ¹è·¯å¾„æœ‰index.html,å°±æ‰“å¼€ï¼›æ²¡æœ‰çš„è¯ï¼Œéœ€è¦è‡ªå·±è¡¥å……ç½‘å€ã€‚
         }
     })
 });
