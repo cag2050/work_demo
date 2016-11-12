@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    var config = {
+        color:"red",
+        fontSize:"12px"
+    };
+
+    var settings = {
+        color:"blue",
+        border:"1px solid red"
+
+    };
+    $.extend(config,settings); // setting覆盖config的属性
+    console.log(config);
+    console.log(settings);
+</script>
+</body>
+</html>

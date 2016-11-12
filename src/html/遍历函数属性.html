@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var video = function () {
+        console.log(this);
+
+        this.name;
+        this.age;
+        this.sex;
+
+    };
+    console.log(video);
+    console.log(video.name);
+    console.log(video.age);
+
+    for(var i in video) {
+        console.log(i);
+        console.log(111);
+    }
+
+    video();
+</script>
+</body>
+</html>
