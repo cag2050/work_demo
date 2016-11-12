@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+<input type="button" id="btn1" value="测试$.proxy用法" name="button的name">
+<script>
+    var obj = {
+        name:"obj的name",
+        sayName:function(){
+            console.log(this.name);
+        }
+    };
+
+    $("#btn1").on("click", function () {
+        console.log($(this).attr("name"));
+    });
+
+    $("#btn1").on("click", function () {
+        var bb = $.proxy(obj,"sayName");
+        bb();
+    });
+
+    $("#btn1").on("click", function () {
+       $.proxy(obj.sayName(),obj);
+    });
+</script>
+</body>
+</html>
