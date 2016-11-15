@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button onclick="play()">播放</button>
+<button onclick="pause()">暂停</button>
+<button onclick="fullScreen()">全屏</button>
+
+<div>
+    <video id="myVideo" width="600" height="400">
+        <source src="../video/video.mp4" type="video/mp4"/>
+    </video>
+</div>
+
+<script>
+    var myVideo = document.getElementById("myVideo");
+    //    myVideo.pause();
+    //    myVideo.play();
+    console.log(document.webkitIsFullScreen);
+
+    function fullScreen() {
+        myVideo.webkitRequestFullScreen();
+        if(document.webkitIsFullScreen) {
+            console.log(111);
+        }
+        console.log(document.webkitIsFullScreen);
+    }
+    //    myVideo.pause();
+
+    //    var waitTime = 2000;
+    //    setTimeout(function () {
+    ////        myVideo.play();
+    //        myVideo.pause();
+    //    }, waitTime);
+
+    function play() {
+        if (myVideo.paused)
+            myVideo.play();
+    }
+    function pause() {
+        myVideo.pause();
+    }
+</script>
+
+</body>
+</html>
