@@ -38,7 +38,9 @@
             myVideo.play();
     }
     function pause() {
-        myVideo.pause();
+        if (!myVideo.paused) {
+            myVideo.pause();
+        }
     }
 </script>
 <script>
