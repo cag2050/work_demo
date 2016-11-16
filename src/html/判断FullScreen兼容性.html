@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="play()">播放</button>
+<button onclick="pause()">暂停</button>
+<button onclick="fullScreen()">全屏</button>
+
+<div>
+    <video id="myVideo" width="600" height="400">
+        <source src="../video/video.mp4" type="video/mp4"/>
+        您的浏览器不支持Html5的video标签。请更换别的浏览器。
+    </video>
+</div>
+
+<script>
+    var myVideo = document.getElementById("myVideo");
+    function fullScreen() {
+        if (myVideo.requestFullscreen) {
+            // w3c,Microsoft Edge and beyond
+            myVideo.requestFullscreen();
+        } else if (myVideo.mozRequestFullScreen) {
+            // Mozilla
+            myVideo.mozRequestFullScreen();
+        } else if (myVideo.webkitRequestFullscreen) {
+            // chrome
+            myVideo.webkitRequestFullscreen();
+        } else if (myVideo.msRequestFullscreen) {
+            // IE 11
+            myVideo.msRequestFullscreen();
+        }
+    }
+    function play() {
+        if (myVideo.paused)
+            myVideo.play();
+    }
+    function pause() {
+        myVideo.pause();
+    }
+</script>
+<script>
+    // 判断不是全屏
+    //    var notFullScreen = "fullScreen" in document && !document.fullScreen
+    //            || "webkitIsFullScreen" in document && !document.webkitIsFullScreen
+    //            || "mozFullScreen" in document && !document.mozFullScreen
+    //            || "msFullscreenEnabled" in document && !document.msFullscreenEnabled
+    //            || "fullscreenEnabled" in document && !document.fullscreenEnabled;
+    // chrome 全屏对象
+    var webkitIsFullScreenObj = {
+        chars: "document.webkitIsFullScreen",
+        bool: function () {
+            return webkitIsFullScreenObj.contain() && !document.webkitIsFullScreen
+        },
+        contain: function () {
+            return 'webkitIsFullScreen' in document
+        },
+        support: function () {
+            return "支持：" + webkitIsFullScreenObj.chars
+        },
+        isFull: function () {
+            return webkitIsFullScreenObj.chars + "判断是否全屏：是"
+        },
+        notFull: function () {
+            return webkitIsFullScreenObj.chars + "判断是否全屏：不是"
+        }
+    };
+
+    // w3c 全屏对象
+    var fullScreenObj = {
+        chars: "document.fullScreen",
+        bool: function () {
+            return fullScreenObj.contain() && !document.fullScreen
+        },
+        contain: function () {
+            return 'fullScreen' in document
+        },
+        support: function () {
+            return "支持：" + fullScreenObj.chars
+        },
+        isFull: function () {
+            return fullScreenObj.chars + "判断是否全屏：是"
+        },
+        notFull: function () {
+            return fullScreenObj.chars + "判断是否全屏：不是"
+        }
+    };
+    // Mozilla 全屏对象
+    var mozFullScreenObj = {
+        chars: "document.mozFullScreen",
+        bool: function () {
+            return mozFullScreenObj.contain() && !document.mozFullScreen
+        },
+        contain: function () {
+            return 'mozFullScreen' in document
+        },
+        support: function () {
+            return "支持：" + mozFullScreenObj.chars
+        },
+        isFull: function () {
+            return mozFullScreenObj.chars + "判断是否全屏：是"
+        },
+        notFull: function () {
+            return mozFullScreenObj.chars + "判断是否全屏：不是"
+        }
+    };
+    // IE11 全屏对象
+    var msFullscreenEnabledObj = {
+        chars: "document.msFullscreenEnabled",
+        bool: function () {
+            return msFullscreenEnabledObj.contain() && !document.msFullscreenEnabled
+        },
+        contain: function () {
+            return 'msFullscreenEnabled' in document
+        },
+        support: function () {
+            return "支持：" + msFullscreenEnabledObj.chars
+        },
+        isFull: function () {
+            return msFullscreenEnabledObj.chars + "判断是否全屏：是"
+        },
+        notFull: function () {
+            return msFullscreenEnabledObj.chars + "判断是否全屏：不是"
+        }
+    };
+    // Microsoft Edge and beyond： 全屏对象
+    var fullscreenEnabledObj = {
+        chars: "document.fullscreenEnabled",
+        bool: function () {
+            return fullscreenEnabledObj.contain() && !document.fullscreenEnabled
+        },
+        contain: function () {
+            return 'fullscreenEnabled' in document
+        },
+        support: function () {
+            return "支持：" + fullscreenEnabledObj.chars
+        },
+        isFull: function () {
+            return fullscreenEnabledObj.chars + "判断是否全屏：是"
+        },
+        notFull: function () {
+            return fullscreenEnabledObj.chars + "判断是否全屏：不是"
+        }
+    };
+    // 通用函数
+    var logicFunc = function (obj) {
+        if (obj.contain()) {
+            console.log(obj.support());
+            setInterval(function () {
+                if (obj.bool()) {
+                    console.log(obj.notFull());
+                }
+                if (!obj.bool()) {
+                    console.log(obj.isFull());
+                }
+            }, 400);
+        }
+    };
+    // 调用各对象，进行判断
+    logicFunc(webkitIsFullScreenObj);
+    logicFunc(fullScreenObj);
+    logicFunc(mozFullScreenObj);
+    logicFunc(msFullscreenEnabledObj);
+    logicFunc(fullscreenEnabledObj);
+</script>
+
+</body>
+</html>

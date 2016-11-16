@@ -13,6 +13,7 @@
 <div>
     <video id="myVideo" width="600" height="400">
         <source src="../video/video.mp4" type="video/mp4"/>
+        您的浏览器不支持Html5的video标签。请更换别的浏览器。
     </video>
 </div>
 
@@ -20,14 +21,9 @@
     var myVideo = document.getElementById("myVideo");
     //    myVideo.pause();
     //    myVideo.play();
-    console.log(document.webkitIsFullScreen);
 
     function fullScreen() {
         myVideo.webkitRequestFullScreen();
-        if(document.webkitIsFullScreen) {
-            console.log(111);
-        }
-        console.log(document.webkitIsFullScreen);
     }
     //    myVideo.pause();
 
@@ -38,11 +34,15 @@
     //    }, waitTime);
 
     function play() {
-        if (myVideo.paused)
+        if (myVideo.paused) {
             myVideo.play();
+        }
     }
     function pause() {
-        myVideo.pause();
+        if (!myVideo.paused) {
+            myVideo.pause();
+        }
+
     }
 </script>
 
