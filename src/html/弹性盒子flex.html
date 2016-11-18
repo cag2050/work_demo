@@ -18,56 +18,42 @@
             display: -webkit-flex;
             flex-direction: column; /*竖直排列*/
         }
+        .h_v_center {
+            display: flex;
+            display: -webkit-flex; /*水平居中*/
+            justify-content: center; /*垂直居中*/
+            align-items: center;
+        }
 
         .header {
             flex: 1; /*占据几份*/
             display: flex;
             display: -webkit-flex;
-            flex-direction: row; /*竖直排列*/
+            flex-direction: row; /*横向排列*/
         }
 
         .home {
             flex: 1; /*占据几份*/
-            display: flex;
-            display: -webkit-flex;
-            justify-content: center; /*水平居中*/
-            align-items: center; /*垂直居中*/
             background: red;
         }
 
         .subject {
             flex: 4; /*占据几份*/
-            display: flex;
-            display: -webkit-flex;
-            justify-content: center;
-            align-items: center;
             background: yellowgreen;
         }
 
         .back {
             flex: 1; /*占据几份*/
-            display: flex;
-            display: -webkit-flex;
-            justify-content: center;
-            align-items: center;
             background: lightgrey;
         }
 
         .article {
             flex: 6; /*占据几份*/
-            display: flex;
-            display: -webkit-flex;
-            justify-content: center;
-            align-items: center;
             background: yellow;
         }
 
         .footer {
             flex: 1; /*占据几份*/
-            display: flex;
-            display: -webkit-flex;
-            justify-content: center;
-            align-items: center;
             background: gray;
         }
     </style>
@@ -75,12 +61,12 @@
 <body>
 <div class="flex-container">
     <div class="header">
-        <div class="home">1</div>
-        <div class="subject">2</div>
-        <div class="back">3</div>
+        <div class="home h_v_center">1</div>
+        <div class="subject h_v_center">2</div>
+        <div class="back h_v_center">3</div>
     </div>
-    <div class="article">article</div>
-    <div class="footer">footer</div>
+    <div class="article h_v_center">article</div>
+    <div class="footer h_v_center">footer</div>
 </div>
 </body>
 </html>
