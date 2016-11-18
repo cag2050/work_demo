@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .flex-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: column; /*竖直排列*/
+        }
+
+        .header {
+            flex: 1; /*占据几份*/
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: row; /*竖直排列*/
+        }
+
+        .home {
+            flex: 1; /*占据几份*/
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center; /*水平居中*/
+            align-items: center; /*垂直居中*/
+            background: red;
+        }
+
+        .subject {
+            flex: 4; /*占据几份*/
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            align-items: center;
+            background: yellowgreen;
+        }
+
+        .back {
+            flex: 1; /*占据几份*/
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            align-items: center;
+            background: lightgrey;
+        }
+
+        .article {
+            flex: 6; /*占据几份*/
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            align-items: center;
+            background: yellow;
+        }
+
+        .footer {
+            flex: 1; /*占据几份*/
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            align-items: center;
+            background: gray;
+        }
+    </style>
+</head>
+<body>
+<div class="flex-container">
+    <div class="header">
+        <div class="home">1</div>
+        <div class="subject">2</div>
+        <div class="back">3</div>
+    </div>
+    <div class="article">article</div>
+    <div class="footer">footer</div>
+</div>
+</body>
+</html>
