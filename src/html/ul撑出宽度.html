@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul, li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width:400px;
+            height: 30px;
+            float: left;
+            background-color: yellow;
+        }
+
+        ul {
+            overflow: hidden;
+            float: right;
+            white-space: nowrap;
+            /*width: 100%;*/
+            text-overflow: ellipsis;
+        }
+
+        li {
+            height: 30px;
+            line-height: 30px;
+            display: inline;
+            /*float: left;*/
+        }
+    </style>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <ul>
+        <li>1</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+        <li>555</li>
+        <li>6</li>
+        <li>777777777</li>
+        <li>88888888</li>
+        <!--<li>999999999</li>-->
+    </ul>
+</div>
+<div style="background-color: white;">-------------------------------------</div>
+<div>
+    <ul>
+        <li>1</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+        <li>555</li>
+        <li>6</li>
+        <li>777777777</li>
+        <li>88888888</li>
+        <!--<li>9999</li>-->
+        <li>9999999999999999999</li>
+        <li>9999999999999999999</li>
+    </ul>
+</div>
+<script>
+    console.log($("ul").width());
+</script>
+</body>
+</html>

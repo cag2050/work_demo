@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // if-else语句实现输出性别
+    var outputSexByIfElse = function (sexValue) {
+        if (sexValue == "male") {
+            document.write("male" + "<br/>");
+        }
+        else if (sexValue == "female") {
+            document.write("female" + "<br/>");
+        }
+        else {
+            document.write("未填写性别" + "<br/>");
+        }
+    };
+    // switch运算符实现输出性别
+    var outputSexByTernaryOperator = function (sexValue) {
+        switch (sexValue) {
+            case("male1"):
+                document.write("male" + "<br/>");
+                break;
+            case("male" || "female"):
+                document.write("female" + "<br/>");
+                break;
+            default :
+                document.write("未填写性别" + "<br/>");
+        }
+    };
+    document.write("if-else语句输出:" + "<br/>");
+    outputSexByIfElse();
+    document.write("switch语句输出:" + "<br/>");
+    outputSexByTernaryOperator("male");
+</script>
+</body>
+</html>
