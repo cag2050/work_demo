@@ -11,25 +11,23 @@
         }
 
         div {
-            width:400px;
+            width: 430px;
             height: 30px;
             float: left;
             background-color: yellow;
+            overflow: hidden;
         }
 
         ul {
-            overflow: hidden;
             float: right;
             white-space: nowrap;
-            /*width: 100%;*/
-            text-overflow: ellipsis;
+            text-overflow: clip;
         }
 
         li {
             height: 30px;
             line-height: 30px;
             display: inline;
-            /*float: left;*/
         }
     </style>
     <script src="../js/lib/jquery.min.js"></script>
@@ -48,7 +46,7 @@
         <!--<li>999999999</li>-->
     </ul>
 </div>
-<div style="background-color: white;">-------------------------------------</div>
+<div style="background-color: white;width:100%;float:left;">-------------------------------------</div>
 <div>
     <ul>
         <li>1</li>
@@ -61,7 +59,7 @@
         <li>88888888</li>
         <!--<li>9999</li>-->
         <li>9999999999999999999</li>
-        <li>9999999999999999999</li>
+        <!--<li>9999999999999999999</li>-->
     </ul>
 </div>
 <script>
