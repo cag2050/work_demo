@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .text_clip {
+            width: 90px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: clip;
+        }
+
+        .text_ellipsis {
+            width: 105px;
+            overflow: hidden;
+            color: red;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+<p>text-overflow: clip; 示例:多余的文字会裁切---</p>
+<div class="text_clip">多余的文字会裁切</div>
+<p>text-overflow: ellipsis; 示例:溢出的文本会显示省略号---</p>
+<div class="text_ellipsis">
+    <a href="http://www.baidu.com">溢出的文本会显示省略号</a>
+</div>
+<div class="text_ellipsis">
+    <a href="http://www.baidu.com">溢出的文本会显示省略号</a>
+</div>
+<div>text_ellipsis样式加在a上</div>
+<div>
+    <a class="text_ellipsis" style="display: block;" href="http://www.baidu.com">溢出的文本会显示省略号</a>
+</div>
+<div class="text_ellipsis">
+    <a href="http://www.baidu.com">溢出的文本会显示省略号</a>
+</div>
+<div class="text_ellipsis">
+    <a href="http://www.baidu.com">溢出的文本会显示省略号</a>
+</div>
+<div class="text_ellipsis">
+    <a href="http://www.baidu.com">溢出的文本会显示省略号</a>
+</div>
+</body>
+</html>
