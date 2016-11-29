@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var browser = (function () {
+        var ua = navigator.userAgent.toLowerCase();
+        var browser = {
+            iPhone: /iphone/.test(ua),
+            iPad: /ipad/.test(ua),
+            iPod: /ipod/.test(ua),
+            mac: /macintosh/.test(ua),
+            Android: /android/.test(ua),
+            AndroidPad: /android/.test(ua) && !/mobile/.test(ua),
+            atwin: /win/.test(ua),
+            opera: /opera/.test(ua),
+            msie: /msie/.test(ua),
+            firefox: /firefox/.test(ua),
+            safari: /safari/.test(ua) && !/chrome/.test(ua),
+            wph: /windows phone/.test(ua),
+            ps: /playstation/.test(ua),
+            uc: /ucbrowser|ucweb/.test(ua),
+            qq: /mqqbrowser/.test(ua),
+            xiaomi: /xiaomi/.test(ua),
+            weixin: /micromessenger/i.test(ua),
+            weibo: /__weibo__/i.test(ua)
+        };
+        return browser;
+    })();
+
+    for (x in browser) {
+        browser[x] && console.log("浏览器类型： " + x);
+    }
+</script>
+</body>
+</html>
