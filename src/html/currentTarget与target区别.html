@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+event.currentTarget指向事件所绑定的元素，而event.target始终指向事件发生的元素。<br/>
+此处事件发生的元素是a。
+<div id="outer">
+    <a href="#" id="inner">click here!</a>
+</div>
+<script>
+    $('#outer').click(function (e) {
+        console.log('事件绑定外面元素div：#outer');
+        console.log('#outer e.currentTarget = ');
+        console.log(e.currentTarget);
+        console.log('#outer e.target = ');
+        console.log(e.target);
+    });
+    $('#inner').click(function (e) {
+        console.log('事件绑定里面元素a：#inner');
+        console.log('#inner e.currentTarget = ');
+        console.log(e.currentTarget);
+        console.log('#inner e.target = ');
+        console.log(e.target);
+    });
+</script>
+</body>
+</html>
