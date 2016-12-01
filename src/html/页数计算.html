@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var pagination = function (extendOptions) {
+        var options = {
+            totalSize: 0,
+            pageSize: 5,
+            pageNum: Math.floor(this.totalSize / this.pageSize) + 1,
+            lastPageSize: this.totalSize % this.pageSize
+
+        };
+        if (extendOptions) {
+            $.extend(options, extendOptions); // extendOptions里的值覆盖和扩展options
+        }
+        console.log("总记录数 = " + options.totalSize);
+        console.log("每页记录数 = " + options.pageSize);
+        console.log("页数 = " + options.pageNum);
+        console.log("最后一页记录数 = " + options.pageNum);
+        return options;
+    };
+
+    pagination({
+        totalSize: 12
+    })
+</script>
+
+
+</body>
+</html>
