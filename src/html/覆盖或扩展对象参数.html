@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    var obj_params = function (extendOptions) {
+        var options = {
+            name: "jeff",
+            age: 30
+        };
+        if (extendOptions) {
+            $.extend(options, extendOptions); // extendOptions里的值覆盖和扩展options
+        }
+        return options;
+    };
+    console.log(obj_params({age: 20, sex: "male"}).sex); // 输出：male
+    console.log(obj_params({age: 20, sex: "male"}).age); // 输出：20
+    console.log(obj_params().sex); // 输出：20
+</script>
+</body>
+</html>
