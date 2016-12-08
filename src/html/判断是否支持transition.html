@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var el = document.body || document.documentElement;
+    var style1 = el.style;
+    var transtions = {
+        transition: style1.transition,
+        WebkitTransition: style1.WebkitTransition,
+        MozTransiton: style1.MozTransiton,
+        OTransiton: style1.OTransiton
+    };
+    for (x in transtions) {
+        console.log(x + ' 的值为：' + transtions[x]);
+    }
+    //判断是否支持transition 的函数
+    var supportTransiton = function () {
+        var el = document.body || document.documentElement;
+        var style1 = el.style;
+        // 只要有一个返回值为true，就是支持的
+        return (style1.transition !== undefined || style1.WebkitTransition !== undefined || style1.MozTransiton !== undefined || style1.OTransiton !== undefined);
+    };
+    console.log('是否支持transtion：' + supportTransiton());
+</script>
+</body>
+</html>

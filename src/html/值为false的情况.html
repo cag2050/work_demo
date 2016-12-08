@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var testFalse = {
+        数字0: 0,
+        数字负0: -0,
+        只有引号: '',
+        null: null,
+        false: false,
+        undefined: undefined,
+        NaN: NaN,
+        空格: ' '
+    };
+    for (x in testFalse) {
+        console.log(x + ' 的逻辑值是:' + !!testFalse[x]);
+    }
+    var f;
+    console.log('只声明，未定义值 的逻辑值是:' + !!f);
+</script>
+</body>
+</html>
