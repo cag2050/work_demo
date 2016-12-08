@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * encodeURI:用于解析整个网址
+     * encodeURIComponent:用于解析网址中的部分
+     */
+    console.log(encodeURI(location.href));
+    document.write("<a href='http://zhifu.le.com/tobuy/regular?fronturl=" + encodeURIComponent(location.href) + "'>超链接</a>");
+</script>
+</body>
+</html>
