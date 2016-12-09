@@ -10,8 +10,19 @@
      * encodeURI:用于解析整个网址
      * encodeURIComponent:用于解析网址中的部分
      */
-    console.log(encodeURI(location.href));
     document.write("<a href='http://zhifu.le.com/tobuy/regular?fronturl=" + encodeURIComponent(location.href) + "'>超链接</a>");
+    var urls = ['http://music.le.com/i zt/index.html',
+        '?aa=1&bb=2', 'http://music.le.com/链接/index.html'];
+    var len = urls.length;
+    for (var i = 0; i < len; i++) {
+        console.log('url = ' + urls[i]);
+        console.log('encodeURI(url) = ' + encodeURI(urls[i]));
+        console.log('decodeURI(url) = ' + decodeURI(urls[i]));
+        console.log('encodeURIComponent(url) = ' + encodeURIComponent(urls[i]));
+        console.log('decodeURIComponent(url) = ' + decodeURIComponent(urls[i]));
+    }
+
+
 </script>
 </body>
 </html>
