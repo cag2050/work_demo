@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #div1 {
+            width: 198px;
+            height: 66px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+    </style>
+    <script type="text/javascript">
+        // 拖拽元素开始被拖拽的时候触发
+        function _dragstart(ev) {
+            ev.dataTransfer.setData("Text", ev.target.id);
+        }
+        // 拖拽元素在目标元素上移动的时候触发
+        function _dragover(ev) {
+            ev.preventDefault(); // 必须有，否则ondrop事件不会被触发
+        }
+        // 被拖拽的元素在目标元素上，同时鼠标放开时触发
+        function _drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    </script>
+</head>
+<body>
+
+<p>请把 W3School 的图片拖放到矩形中333：</p>
+
+<div id="div1" ondrop="_drop(event)" ondragover="_dragover(event)"></div>
+<br/>
+<img id="drag1" src="../images/w3school.gif" draggable="true" ondragstart="_dragstart(event)"/>
+
+</body>
+</html>
