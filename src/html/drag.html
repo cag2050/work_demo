@@ -1,0 +1,66 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style type="text/Css">
+        body {
+            background-color: #000000;
+        }
+
+        .window {
+            position: absolute;
+            z-index: 1;
+            overflow: hidden;
+            width: 600px;
+            height: 400px;
+            background-color: red;
+            left: 0px;
+        }
+
+        .dragme {
+            position: relative;
+            background-image: url('img/testbg.png');
+            width: 800px;
+            height: 400px;
+        }
+    </style>
+
+    <script type="text/javascript" charset="utf-8" src="../js/lib/jquery.min.js"></script>
+    <script type="text/javascript">
+        var isdrag = false;
+        var tx, x;
+        $(function () {
+            document.getElementById("moveid").addEventListener('touchend', function () {
+                sdrag = false;
+            });
+            document.getElementById("moveid").addEventListener('touchstart', selectmouse);
+            document.getElementById("moveid").addEventListener('touchmove', movemouse);
+        });
+        function movemouse(e) {
+            if (isdrag) {
+                var n = tx + e.touches[0].pageX - x;
+                $("#moveid").css("left", n);
+                return false;
+            }
+        }
+
+        function selectmouse(e) {
+            isdrag = true;
+            tx = parseInt(document.getElementById("moveid").style.left + 0);
+            x = e.touches[0].pageX;
+            return false;
+        }
+    </script>
+
+</head>
+<body>
+<div align="left" class="window">
+    <div id="moveid" class="dragme">
+        这是一个可以通过触摸屏拖动的demo<br>
+        这个demo花费了我半天时间，原因是以前从来没有做过面向触摸屏的Web，按说mousedown,mouseup,mousemove和touchstart，touchend，touchmove
+        之间是可以互通的，也就是说一般面向pc开发的mouse时间对touch事件有效，据说是效率有差异。但是pc上测试没有任何问题，在手机上就是无效。
+        然后……
+        然后百度了很久很久……
+
+    </div>
+</div>
+</html> 

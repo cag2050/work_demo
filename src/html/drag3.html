@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <style>
+        /*html {*/
+        /*overflow: auto;*/
+        /*}*/
+
+        /*body {*/
+        /*height: 100%;*/
+        /*overflow: auto;*/
+        /*}*/
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #content {
+            height: 100%;
+            z-index: 1;
+        }
+
+        #block {
+            width: 100%;
+            /*height: auto;*/
+            box-sizing: border-box;
+            background-color: black;
+            position: fixed;
+            z-index: 2;
+        }
+
+        #video {
+            width: 100%;
+            /*height:auto;*/
+            box-sizing: border-box;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="content">
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    <!--touchend,touchcancel<br/>-->
+    <!--touchstart,touchmove<br/>-->
+    <!--touchend,touchcancel<br/>touchstart,touchmove<br/>-->
+    <!--touchend,touchcancel<br/>-->
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    ouchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    <!--touchstart,touchmove<br/>-->
+    <!--touchstart,touchmove<br/>-->
+    touchend,touchcancel3333333333333333333333
+</div>
+<!--<div id="block" style="top: 0;">1<br/>1<br/>1<br/>1<br/>1<br/>2<br/>2<br/>2<br/>2<br/>3<br/>2</div>-->
+<div id="block" style="top: 0;">
+    <video id="video" controls draggable="true">
+        <source src="../video/le.mp4" type="video/mp4"/>
+        您的浏览器不支持Html5的video标签。请更换别的浏览器。
+    </video>
+</div>
+<!--<video id="block" style="top: 0;" controls draggable="true">-->
+<!--<source src="../video/le.mp4" type="video/mp4"/>-->
+<!--您的浏览器不支持Html5的video标签。请更换别的浏览器。-->
+<!--</video>-->
+
+<script>
+    var block = document.getElementById("block");
+    var video = document.getElementById("video");
+    var content = document.getElementById("content");
+    var endVideoHeight = 0;
+    var oW, oH; // 点击位置到元素左侧/顶部距离
+
+    block.addEventListener("touchstart", function (e) {
+        document.getElementById("content").style.opacity = 0.2;
+        var touches = e.touches[0];
+        oW = touches.clientX - block.offsetLeft; // 点击位置到元素左侧距离 = 点击位置距左侧距离-元素距左侧距离位置
+        oH = touches.clientY - block.offsetTop;
+        document.addEventListener("touchmove", _preventDefault);
+    });
+
+    block.addEventListener("touchmove", function (e) {
+//        console.log(block.offsetTop);
+        var touches = e.touches[0];
+        var oLeft = touches.clientX - oW; // 元素居左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
+        var oTop = touches.clientY - oH;
+//        var visibleWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+//        var visibleWidth = window.innerWidth;
+//        var visibleWidth =
+//        var visibleWidth = document.documenscreen.width;tElement.clientWidth;
+//        var visibleHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+//        var visibleHeight = window.innerHeight;
+//        var visibleHeight = screen.height;
+//        var visibleHeight = document.documentElement.clientHeight;
+        var visibleWidth = window.innerWidth;
+        var visibleHeight = window.innerHeight;
+        if (oLeft < 0) {
+            oLeft = 0;
+        } else if (oLeft > visibleWidth - block.offsetWidth) {
+            oLeft = (visibleWidth - block.offsetWidth);
+        }
+        if (oTop < 0) {
+            oTop = 0;
+        } else if (oTop > visibleHeight - block.offsetHeight) {
+            oTop = (visibleHeight - block.offsetHeight);
+        }
+        block.style.left = oLeft + "px";
+        block.style.top = oTop + "px";
+        block.style.height = video.style.height;
+        console.log(video.style.height);
+
+    });
+
+    block.addEventListener("touchend", function () {
+        document.getElementById("content").style.opacity = 1;
+        document.removeEventListener("touchmove", _preventDefault);
+        if (block.offsetTop < screen.availHeight / 3) {
+            block.style = 'top:0;';
+        }
+        else {
+            block.style = 'width:50%;bottom:5px;right:5px;';
+            video.style = 'width:100%;';
+        }
+    });
+
+    function _preventDefault(e) {
+        e.preventDefault();
+    }
+</script>
+</body>
+</html>

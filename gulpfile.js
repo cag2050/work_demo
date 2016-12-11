@@ -9,6 +9,8 @@ gulp.task("browser-sync", function () {
     browserSync.init({
         //files: "./src/html/*.html,./src/css/*.css,./src/js/*.js,./src/*.*", // 监控的文件
         files: "./src/**/*.*", // 监控的文件
+        ghostMode: {clicks: true, scroll: true},
+        //browser:['chrome'],
         server: {
             baseDir: "./src" // 根路径。若根路径有index.html,就打开；没有的话，需要自己补充网址。
         }

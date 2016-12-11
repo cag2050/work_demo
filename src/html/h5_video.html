@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        html,body {
+            width:100%;
+        }
+    </style>
 </head>
 <body>
 
-<button onclick="play()">播放</button>
-<button onclick="pause()">暂停</button>
-<button onclick="fullScreen()">全屏</button>
+<!--<button onclick="play()">播放</button>-->
+<!--<button onclick="pause()">暂停</button>-->
+<!--<button onclick="fullScreen()">全屏</button>-->
 
-<div>
-    <video id="myVideo" width="600" height="400">
-        <source src="../video/video.mp4" type="video/mp4"/>
+<div style="width:100%;">
+    <video id="myVideo" width="100%" controls>
+        <source src="../video/le.mp4" type="video/mp4"/>
         您的浏览器不支持Html5的video标签。请更换别的浏览器。
     </video>
 </div>
