@@ -7,12 +7,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <style>
         /*html {*/
-            /*overflow: auto;*/
+        /*overflow: auto;*/
         /*}*/
 
         /*body {*/
-            /*height: 100%;*/
-            /*overflow: auto;*/
+        /*height: 100%;*/
+        /*overflow: auto;*/
         /*}*/
 
         html, body {
@@ -106,16 +106,8 @@
         var touches = e.touches[0];
         var oLeft = touches.clientX - oW; // 元素居左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
         var oTop = touches.clientY - oH;
-//        var visibleWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-//        var visibleWidth = window.innerWidth;
-//        var visibleWidth =
-//        var visibleWidth = document.documenscreen.width;tElement.clientWidth;
-//        var visibleHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-//        var visibleHeight = window.innerHeight;
-//        var visibleHeight = screen.height;
-//        var visibleHeight = document.documentElement.clientHeight;
-        var visibleWidth = window.innerWidth;
-        var visibleHeight = window.innerHeight;
+        var visibleWidth = document.documentElement.clientWidth;
+        var visibleHeight = document.documentElement.clientHeight;
         if (oLeft < 0) {
             oLeft = 0;
         } else if (oLeft > visibleWidth - block.offsetWidth) {
