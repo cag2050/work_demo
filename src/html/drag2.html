@@ -28,10 +28,11 @@
 
         #block {
             width: 100%;
+            right: 0;
             /*height: auto;*/
             /*height: 100px;*/
             box-sizing: border-box;
-            background-color: white;
+            background-color: black;
             position: fixed;
             /*padding-left: 5px;*/
             /*padding-right: 5px;*/
@@ -99,7 +100,6 @@
     //    block.style.height = visibleWidth / 2 + 'px';
 
     block.addEventListener("touchstart", function (e) {
-        document.getElementById("content").style.opacity = 0.2;
         var touches = e.touches[0];
         oW = touches.clientX - block.offsetLeft; // 点击位置到元素左侧距离 = 点击位置距左侧距离-元素距左侧距离位置
         oH = touches.clientY - block.offsetTop;
@@ -107,12 +107,13 @@
     });
 
     block.addEventListener("touchmove", function (e) {
-        console.log(block.offsetTop);
+        document.getElementById("content").style.opacity = 0.2;
         var touches = e.touches[0];
         var oLeft = touches.clientX - oW; // 元素居左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
         var oTop = touches.clientY - oH;
         var visibleWidth = document.documentElement.clientWidth;
         var visibleHeight = document.documentElement.clientHeight;
+
         if (oLeft < 0) {
             oLeft = 0;
         } else if (oLeft > visibleWidth - block.offsetWidth) {
@@ -123,8 +124,14 @@
         } else if (oTop > visibleHeight - block.offsetHeight) {
             oTop = (visibleHeight - block.offsetHeight);
         }
-        block.style.left = oLeft + "px";
+//        console.log("oLeft = "+ oLeft);
+//        console.log("oTop  = "+ oTop);
+
+//        block.style.left = oLeft + "px";
         block.style.top = oTop + "px";
+        var changingWidth = 100 - 3 * oTop / 64;
+        block.style.width = changingWidth + '%';
+//        setTimeout()
     });
 
     block.addEventListener("touchend", function () {
