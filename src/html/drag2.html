@@ -16,6 +16,7 @@
         /*}*/
 
         html, body {
+            width: 100%;
             margin: 0;
             padding: 0;
         }
@@ -27,12 +28,13 @@
 
         #block {
             width: 100%;
-            height: auto;
+            /*height: auto;*/
+            /*height: 100px;*/
             box-sizing: border-box;
             background-color: white;
             position: fixed;
-            padding-left: 5px;
-            padding-right: 5px;
+            /*padding-left: 5px;*/
+            /*padding-right: 5px;*/
             z-index: 2;
         }
 
@@ -93,6 +95,9 @@
     var content = document.getElementById("content");
     var oW, oH; // 点击位置到元素左侧/顶部距离
 
+    var visibleWidth = document.documentElement.clientWidth;
+    //    block.style.height = visibleWidth / 2 + 'px';
+
     block.addEventListener("touchstart", function (e) {
         document.getElementById("content").style.opacity = 0.2;
         var touches = e.touches[0];
@@ -127,22 +132,24 @@
         document.removeEventListener("touchmove", _preventDefault);
         if (block.offsetTop < screen.height / 3) {
             block.style = 'top:0;';
+//            block.style.height = visibleWidth / 2 + 'px'; // le2 指定高度
         }
         else {
-            block.style = 'width:50%;bottom:5px;right:5px;';
+            block.style = 'width:70%;bottom:5px;right:5px;';
+//            block.style.height = visibleWidth * 0.7 / 2 + 'px'; // le2 指定高度
         }
     });
     // UC浏览器兼容性处理
-    block.addEventListener("touchcancel", function () {
-        document.getElementById("content").style.opacity = 1;
-        document.removeEventListener("touchmove", _preventDefault);
-        if (block.offsetTop < screen.height / 3) {
-            block.style = 'top:0;';
-        }
-        else {
-            block.style = 'width:50%;bottom:5px;right:5px;';
-        }
-    });
+    //    block.addEventListener("touchcancel", function () {
+    //        document.getElementById("content").style.opacity = 1;
+    //        document.removeEventListener("touchmove", _preventDefault);
+    //        if (block.offsetTop < screen.height / 3) {
+    //            block.style = 'top:0;';
+    //        }
+    //        else {
+    //            block.style = 'width:75%;bottom:5px;right:5px;';
+    //        }
+    //    });
 
     function _preventDefault(e) {
         e.preventDefault();
