@@ -108,10 +108,7 @@
     });
 
     block.addEventListener("touchmove", function (e) {
-        console.log(111);
-        e.preventDefault();
-//        _preventDefault(e);
-        console.log(222);
+        _preventDefault(e);
         document.getElementById("content").style.opacity = 0.2;
         var touches = e.touches[0];
         var oLeft = touches.clientX - oW; // 元素居左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
