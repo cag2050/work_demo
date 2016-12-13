@@ -100,6 +100,7 @@
     //    block.style.height = visibleWidth / 2 + 'px';
 
     block.addEventListener("touchstart", function (e) {
+//        _preventDefault(e);
         var touches = e.touches[0];
         oW = touches.clientX - block.offsetLeft; // 点击位置到元素左侧距离 = 点击位置距左侧距离-元素距左侧距离位置
         oH = touches.clientY - block.offsetTop;
@@ -107,6 +108,10 @@
     });
 
     block.addEventListener("touchmove", function (e) {
+        console.log(111);
+        e.preventDefault();
+//        _preventDefault(e);
+        console.log(222);
         document.getElementById("content").style.opacity = 0.2;
         var touches = e.touches[0];
         var oLeft = touches.clientX - oW; // 元素居左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
