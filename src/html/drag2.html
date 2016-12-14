@@ -21,7 +21,7 @@
             padding: 0;
         }
 
-        #content {
+        #list {
             height: 100%;
             z-index: 1;
         }
@@ -30,7 +30,7 @@
             width: 100%;
             right: 0;
             /*height: auto;*/
-            /*height: 100px;*/
+            /*height: 200px;*/
             box-sizing: border-box;
             background-color: black;
             position: fixed;
@@ -39,10 +39,16 @@
             z-index: 2;
         }
 
+        #intro {
+            z-index: 2;
+            position: fixed;
+            /*top: 200px;*/
+        }
+
     </style>
 </head>
 <body>
-<div id="content">
+<div id="list">
     touchstart,touchmove<br/>
     touchend,touchcancel<br/>
     touchstart,touchmove<br/>
@@ -81,26 +87,46 @@
     touchend,touchcancel<br/>
     touchstart,touchmove<br/>
     touchstart,touchmove<br/>
+    touchstart,touchmove<br/>
+    touchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    ouchstart,touchmove<br/>
+    touchend,touchcancel<br/>
+    touchstart,touchmove<br/>
+    touchstart,touchmove<br/>
     touchend,touchcancel<br/>
     <!--touchstart,touchmove<br/>-->
     <!--touchstart,touchmove<br/>-->
     touchend,touchcancel3333333333333333333333
 </div>
-<video id="block" style="top: 0;" controls draggable="true">
-    <source src="../video/le.mp4" type="video/mp4"/>
+<video id="block"
+       style="top: 0;"
+       controls>
+    <source src="../video/le.mp4"
+            type="video/mp4"/>
     您的浏览器不支持Html5的video标签。请更换别的浏览器。
 </video>
+<div id="intro">
+    视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+    绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍
+</div>
 
 <script>
     var block = document.getElementById("block");
-    var content = document.getElementById("content");
+    var list = document.getElementById("list");
+    var intro =
+            document.getElementById("intro");
     var oW, oH; // 点击位置到元素左侧/顶部距离
 
     var visibleWidth = document.documentElement.clientWidth;
-    //    block.style.height = visibleWidth / 2 + 'px';
+    var introTop = block.offsetHeight;
+    intro.style.top = introTop + 10 + "px";
+    var oTop = 0;
 
     block.addEventListener("touchstart", function (e) {
-//        _preventDefault(e);
+        intro.style.visibility = "visible";
+//        console.log('touchstart');
         var touches = e.touches[0];
         oW = touches.clientX - block.offsetLeft; // 点击位置到元素左侧距离 = 点击位置距左侧距离-元素距左侧距离位置
         oH = touches.clientY - block.offsetTop;
@@ -109,13 +135,12 @@
 
     block.addEventListener("touchmove", function (e) {
         _preventDefault(e);
-        document.getElementById("content").style.opacity = 0.2;
+        list.style.opacity = 0.2;
         var touches = e.touches[0];
         var oLeft = touches.clientX - oW; // 元素居左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
-        var oTop = touches.clientY - oH;
+        oTop = touches.clientY - oH;
         var visibleWidth = document.documentElement.clientWidth;
         var visibleHeight = document.documentElement.clientHeight;
-
         if (oLeft < 0) {
             oLeft = 0;
         } else if (oLeft > visibleWidth - block.offsetWidth) {
@@ -126,39 +151,26 @@
         } else if (oTop > visibleHeight - block.offsetHeight) {
             oTop = (visibleHeight - block.offsetHeight);
         }
-//        console.log("oLeft = "+ oLeft);
-//        console.log("oTop  = "+ oTop);
-
-//        block.style.left = oLeft + "px";
         block.style.top = oTop + "px";
-        var changingWidth = 100 - 3 * oTop / 64;
+        var changingWidth = 100 - 5 * oTop / 64;
         block.style.width = changingWidth + '%';
-//        setTimeout()
+        intro.style.top = block.offsetHeight + 10 + oTop + "px";
     });
 
     block.addEventListener("touchend", function () {
-        document.getElementById("content").style.opacity = 1;
+        list.style.opacity = 1;
         document.removeEventListener("touchmove", _preventDefault);
         if (block.offsetTop < screen.height / 3) {
             block.style = 'top:0;';
-//            block.style.height = visibleWidth / 2 + 'px'; // le2 指定高度
+            intro.style.top = block.offsetHeight + 10 + "px";
         }
         else {
-            block.style = 'width:70%;bottom:5px;right:5px;';
-//            block.style.height = visibleWidth * 0.7 / 2 + 'px'; // le2 指定高度
+            block.style = 'width:50%;bottom:5px;right:5px;';
+            intro.style.top = document.documentElement.clientHeight + "px";
+            intro.style.visibility = "hidden";
         }
+//        intro.style.top = block.offsetHeight + 10 + oTop + "px";
     });
-    // UC浏览器兼容性处理
-    //    block.addEventListener("touchcancel", function () {
-    //        document.getElementById("content").style.opacity = 1;
-    //        document.removeEventListener("touchmove", _preventDefault);
-    //        if (block.offsetTop < screen.height / 3) {
-    //            block.style = 'top:0;';
-    //        }
-    //        else {
-    //            block.style = 'width:75%;bottom:5px;right:5px;';
-    //        }
-    //    });
 
     function _preventDefault(e) {
         e.preventDefault();
