@@ -20,6 +20,7 @@
 
         #block {
             width: 100%;
+            height: 56.25%;
             right: 0;
             box-sizing: border-box;
             background-color: black;
@@ -88,7 +89,7 @@
     touchend,touchcancel3333333333333333333333
 </div>
 <video id="block"
-       style="top: 0;"
+       style="width: 100%;height: 56.25%;top: 0;"
        controls>
     <source src="../video/le.mp4"
             type="video/mp4"/>
@@ -109,6 +110,7 @@
     var visibleHeight = document.documentElement.clientHeight;
     var introTop = block.offsetHeight;
     intro.style.top = introTop + 10 + "px";
+    var ratio = 9 / 16;
     var oTop = 0;
     var endPercentWidth = 70; // 视频在右下角时所占的百分比数值,比如:30
     var endBottom = 5; // 视频在右下角时距屏幕底部距离,比如:5
@@ -152,6 +154,8 @@
         // 视频在右下角时距屏幕底部距离 * video距顶距离 / (屏幕高度-视频高度-视频在右下角时距屏幕底部距离)
         block.style.bottom = endBottom * oTop / (visibleHeight - block.offsetHeight - endBottom) + 'px';
         block.style.width = changingWidth + '%';
+        block.style.height = ratio * changingWidth + '%';
+        console.log(ratio * changingWidth);
         intro.style.top = block.offsetHeight + 10 + oTop + "px";
     });
 
@@ -164,12 +168,71 @@
             list.style.opacity = 0;
         }
         else {
-            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;";
+            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
             intro.style.top = visibleHeight + "px";
             intro.style.visibility = "hidden";
             list.style.opacity = 1;
         }
     });
+
+    function orientationChange() {
+//        alert('"onorientationchange" in window = ');
+//        alert("onorientationchange" in window);
+        switch (window.orientation) {
+            case 90:
+            case -90:
+                console.log("横屏");
+//                block.style = "width:100%;height:100%;top:0;";
+//                intro.style.visibility = "hidden";
+//                list.style.visibility = "hidden";
+
+//                block.webkitRequestFullScreen();
+                setTimeout(function () {
+//                    list.style.visibility = "hidden";
+//                    intro.style.visibility = "hidden";
+//                    block.style = "width:100%;height:100%;top:0;";
+//                    block.removeEventListener("touchstart", _preventDefault);
+//                    block.removeEventListener("touchmove", _preventDefault);
+//                    block.removeEventListener("touchend", _preventDefault);
+
+                    console.log("横屏");
+                    var videoHeight1 = block.offsetHeight;
+                    console.log(videoHeight1 + 10);
+                    intro.style.top = videoHeight1 + 10 + "px";
+                    console.log(intro.style.top);
+                }, 200);
+                break;
+
+            default:
+                setTimeout(function () {
+                    console.log("竖屏");
+
+//                    console.log(block.style.bottom);
+//                    if(block.style.bottom == '5px') {
+//                        console.log(111);
+//                    }
+
+//                block.style = "width:100%;height:auto;top:0;";
+//                block.style = "width:100%;height:auto;bottom:5px;";
+//                intro.style.visibility = "visible";
+//                list.style.visibility = "visible";
+
+//                    list.style.visibility = "visible";
+//                    intro.style.visibility = "visible";
+//                    block.style = "width:100%;";
+
+                    var videoHeight2 = block.offsetHeight;
+                    console.log(videoHeight2 + 10);
+//                    alert(videoHeight2 + 10);
+                    intro.style.top = videoHeight2 + 10 + "px";
+                    console.log(intro.style.top);
+                }, 200);
+                break;
+
+        }
+    }
+
+    window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange);
 
     function _preventDefault(e) {
         e.preventDefault();

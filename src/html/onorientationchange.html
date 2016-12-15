@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function orientationChange() {
+        alert('"onorientationchange" in window = ');
+        alert("onorientationchange" in window);
+        switch (window.orientation) {
+            case 90:
+            case -90:
+                alert("横屏");
+                break;
+            default:
+                alert("竖屏");
+                break;
+        }
+    }
+
+    window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange);
+</script>
+</body>
+</html>
