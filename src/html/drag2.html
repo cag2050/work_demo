@@ -24,6 +24,7 @@
         #list {
             height: 100%;
             z-index: 1;
+            opacity: 0;
         }
 
         #block {
@@ -115,18 +116,17 @@
 <script>
     var block = document.getElementById("block");
     var list = document.getElementById("list");
-    var intro =
-            document.getElementById("intro");
+    var intro = document.getElementById("intro");
     var oW, oH; // 点击位置到元素左侧/顶部距离
 
     var visibleWidth = document.documentElement.clientWidth;
     var introTop = block.offsetHeight;
     intro.style.top = introTop + 10 + "px";
     var oTop = 0;
+    var percentWidth = 70; // 视频在右下角时所占的百分比数值,比如:30
 
     block.addEventListener("touchstart", function (e) {
         intro.style.visibility = "visible";
-//        console.log('touchstart');
         var touches = e.touches[0];
         oW = touches.clientX - block.offsetLeft; // 点击位置到元素左侧距离 = 点击位置距左侧距离-元素距左侧距离位置
         oH = touches.clientY - block.offsetTop;
@@ -135,10 +135,10 @@
 
     block.addEventListener("touchmove", function (e) {
         _preventDefault(e);
-        list.style.opacity = 0.2;
+//        list.style.opacity = 0.2;
         var touches = e.touches[0];
-        var oLeft = touches.clientX - oW; // 元素居左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
-        oTop = touches.clientY - oH;
+        var oLeft = touches.clientX - oW; // 元素距左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
+        oTop = touches.clientY - oH; // 元素距顶部距离
         var visibleWidth = document.documentElement.clientWidth;
         var visibleHeight = document.documentElement.clientHeight;
         if (oLeft < 0) {
@@ -152,7 +152,12 @@
             oTop = (visibleHeight - block.offsetHeight);
         }
         block.style.top = oTop + "px";
-        var changingWidth = 100 - 5 * oTop / 64;
+        // 计算video的百分比宽度
+        // 100 - (100 -最后变成的百分比数值) * video距顶距离 / (屏幕高度-视频高度)
+        var changingWidth = 100 - (100 - percentWidth) * oTop / (visibleHeight - block.offsetHeight);
+        // 计算list的透明度
+        //  video距顶距离 / (屏幕高度-视频高度)
+        list.style.opacity = oTop / (visibleHeight - block.offsetHeight);
         block.style.width = changingWidth + '%';
         intro.style.top = block.offsetHeight + 10 + oTop + "px";
     });
@@ -163,13 +168,15 @@
         if (block.offsetTop < screen.height / 3) {
             block.style = 'top:0;';
             intro.style.top = block.offsetHeight + 10 + "px";
+            list.style.opacity = 0;
         }
         else {
-            block.style = 'width:50%;bottom:5px;right:5px;';
+//            block.style = "width:" + percentWidth + "%;bottom:0;right:0;";
+            block.style = "width:" + percentWidth + "%;bottom:5px;right:5px;";
             intro.style.top = document.documentElement.clientHeight + "px";
             intro.style.visibility = "hidden";
+            list.style.opacity = 1;
         }
-//        intro.style.top = block.offsetHeight + 10 + oTop + "px";
     });
 
     function _preventDefault(e) {
