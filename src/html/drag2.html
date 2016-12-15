@@ -14,23 +14,24 @@
 
         #list {
             height: 100%;
+            /*overflow: visible;*/
             z-index: 1;
             opacity: 0;
         }
 
         #block {
             width: 100%;
-            height: 56.25%;
+            /*height: 56.25%;*/
             right: 0;
             box-sizing: border-box;
             background-color: black;
-            position: fixed;
+            position: absolute;
             z-index: 2;
         }
 
         #intro {
             z-index: 2;
-            position: fixed;
+            position: absolute;
         }
 
     </style>
@@ -88,16 +89,25 @@
     <!--touchstart,touchmove<br/>-->
     touchend,touchcancel3333333333333333333333
 </div>
-<video id="block"
-       style="width: 100%;height: 56.25%;top: 0;"
-       controls>
-    <source src="../video/le.mp4"
-            type="video/mp4"/>
-    您的浏览器不支持Html5的video标签。请更换别的浏览器。
-</video>
-<div id="intro">
-    视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
-    绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍
+<div id="video_intro">
+    <!--<video id="block" style="width: 100%;height: 56.25%;top: 0;" controls>-->
+    <video id="block" style="width: 100%;top: 0;" controls>
+        <source src="../video/le.mp4" type="video/mp4"/>
+        您的浏览器不支持Html5的video标签。请更换别的浏览器。
+    </video>
+    <div id="intro">
+        111视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍1视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        222绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        333绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        444绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        555绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        666绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        777绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        888绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        999绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍
+    </div>
 </div>
 
 <script>
@@ -109,15 +119,18 @@
     var visibleWidth = document.documentElement.clientWidth;
     var visibleHeight = document.documentElement.clientHeight;
     var introTop = block.offsetHeight;
-    intro.style.top = introTop + 10 + "px";
+    intro.style.top = introTop + block.offsetTop + 10 + "px";
+//    console.log(intro.style.top);
     var ratio = 9 / 16;
     var oTop = 0;
-    var endPercentWidth = 70; // 视频在右下角时所占的百分比数值,比如:30
+    var endPercentWidth = 50; // 视频在右下角时所占的百分比数值,比如:30
     var endBottom = 5; // 视频在右下角时距屏幕底部距离,比如:5
     var endRight = 5; // 视频在右下角时距屏幕右部距离,比如:5
 
     block.addEventListener("touchstart", function (e) {
-        intro.style.visibility = "visible";
+        intro.style.display = "block";
+        intro.style.top = block.offsetHeight + block.offsetTop + 10 + "px";
+        console.log(intro.style.top);
         var touches = e.touches[0];
         oW = touches.clientX - block.offsetLeft; // 点击位置到元素左侧距离 = 点击位置距左侧距离-元素距左侧距离位置
         oH = touches.clientY - block.offsetTop;
@@ -154,8 +167,7 @@
         // 视频在右下角时距屏幕底部距离 * video距顶距离 / (屏幕高度-视频高度-视频在右下角时距屏幕底部距离)
         block.style.bottom = endBottom * oTop / (visibleHeight - block.offsetHeight - endBottom) + 'px';
         block.style.width = changingWidth + '%';
-        block.style.height = ratio * changingWidth + '%';
-        console.log(ratio * changingWidth);
+//        block.style.height = ratio * changingWidth + '%';
         intro.style.top = block.offsetHeight + 10 + oTop + "px";
     });
 
@@ -163,14 +175,21 @@
         list.style.opacity = 1;
         document.removeEventListener("touchmove", _preventDefault);
         if (block.offsetTop < screen.height / 3) {
+//            block.style = 'top:0;position:fixed;';
             block.style = 'top:0;';
             intro.style.top = block.offsetHeight + 10 + "px";
             list.style.opacity = 0;
         }
         else {
-            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
-            intro.style.top = visibleHeight + "px";
-            intro.style.visibility = "hidden";
+//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;";
+            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;position:fixed;";
+//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
+            intro.style.top = block.offsetHeight + 10 + oTop + "px"
+//            console.log(block.offsetHeight);
+//            console.log(oTop);
+//            console.log(intro.style.top);
+//            intro.style.top = visibleHeight + "px";
+            intro.style.display = "none";
             list.style.opacity = 1;
         }
     });
@@ -197,9 +216,7 @@
 
                     console.log("横屏");
                     var videoHeight1 = block.offsetHeight;
-                    console.log(videoHeight1 + 10);
                     intro.style.top = videoHeight1 + 10 + "px";
-                    console.log(intro.style.top);
                 }, 200);
                 break;
 
@@ -222,10 +239,8 @@
 //                    block.style = "width:100%;";
 
                     var videoHeight2 = block.offsetHeight;
-                    console.log(videoHeight2 + 10);
 //                    alert(videoHeight2 + 10);
                     intro.style.top = videoHeight2 + 10 + "px";
-                    console.log(intro.style.top);
                 }, 200);
                 break;
 
