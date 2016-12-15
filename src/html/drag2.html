@@ -6,15 +6,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <style>
-        /*html {*/
-        /*overflow: auto;*/
-        /*}*/
-
-        /*body {*/
-        /*height: 100%;*/
-        /*overflow: auto;*/
-        /*}*/
-
         html, body {
             width: 100%;
             margin: 0;
@@ -30,20 +21,15 @@
         #block {
             width: 100%;
             right: 0;
-            /*height: auto;*/
-            /*height: 200px;*/
             box-sizing: border-box;
             background-color: black;
             position: fixed;
-            /*padding-left: 5px;*/
-            /*padding-right: 5px;*/
             z-index: 2;
         }
 
         #intro {
             z-index: 2;
             position: fixed;
-            /*top: 200px;*/
         }
 
     </style>
@@ -120,10 +106,13 @@
     var oW, oH; // 点击位置到元素左侧/顶部距离
 
     var visibleWidth = document.documentElement.clientWidth;
+    var visibleHeight = document.documentElement.clientHeight;
     var introTop = block.offsetHeight;
     intro.style.top = introTop + 10 + "px";
     var oTop = 0;
-    var percentWidth = 70; // 视频在右下角时所占的百分比数值,比如:30
+    var endPercentWidth = 70; // 视频在右下角时所占的百分比数值,比如:30
+    var endBottom = 5; // 视频在右下角时距屏幕底部距离,比如:5
+    var endRight = 5; // 视频在右下角时距屏幕右部距离,比如:5
 
     block.addEventListener("touchstart", function (e) {
         intro.style.visibility = "visible";
@@ -139,8 +128,6 @@
         var touches = e.touches[0];
         var oLeft = touches.clientX - oW; // 元素距左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
         oTop = touches.clientY - oH; // 元素距顶部距离
-        var visibleWidth = document.documentElement.clientWidth;
-        var visibleHeight = document.documentElement.clientHeight;
         if (oLeft < 0) {
             oLeft = 0;
         } else if (oLeft > visibleWidth - block.offsetWidth) {
@@ -149,15 +136,21 @@
         if (oTop < 0) {
             oTop = 0;
         } else if (oTop > visibleHeight - block.offsetHeight) {
-            oTop = (visibleHeight - block.offsetHeight);
+            oTop = (visibleHeight - block.offsetHeight - 5);
         }
         block.style.top = oTop + "px";
         // 计算video的百分比宽度
-        // 100 - (100 -最后变成的百分比数值) * video距顶距离 / (屏幕高度-视频高度)
-        var changingWidth = 100 - (100 - percentWidth) * oTop / (visibleHeight - block.offsetHeight);
+        // 100 - (100 -最后变成的百分比数值) * video距顶距离 / (屏幕高度-视频高度-视频在右下角时距屏幕底部距离)
+        var changingWidth = 100 - (100 - endPercentWidth) * oTop / (visibleHeight - block.offsetHeight - endBottom);
         // 计算list的透明度
-        //  video距顶距离 / (屏幕高度-视频高度)
-        list.style.opacity = oTop / (visibleHeight - block.offsetHeight);
+        //  video距顶距离 / (屏幕高度-视频高度-视频在右下角时距屏幕底部距离)
+        list.style.opacity = oTop / (visibleHeight - block.offsetHeight - endBottom);
+        // 计算video在滑动过程中距右侧距离
+        // 视频在右下角时距屏幕右部距离 * video距顶距离 / (屏幕高度-视频高度-视频在右下角时距屏幕底部距离)
+        block.style.right = endRight * oTop / (visibleHeight - block.offsetHeight - endBottom) + 'px';
+        // 计算video在滑动过程中距底部距离
+        // 视频在右下角时距屏幕底部距离 * video距顶距离 / (屏幕高度-视频高度-视频在右下角时距屏幕底部距离)
+        block.style.bottom = endBottom * oTop / (visibleHeight - block.offsetHeight - endBottom) + 'px';
         block.style.width = changingWidth + '%';
         intro.style.top = block.offsetHeight + 10 + oTop + "px";
     });
@@ -171,9 +164,8 @@
             list.style.opacity = 0;
         }
         else {
-//            block.style = "width:" + percentWidth + "%;bottom:0;right:0;";
-            block.style = "width:" + percentWidth + "%;bottom:5px;right:5px;";
-            intro.style.top = document.documentElement.clientHeight + "px";
+            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;";
+            intro.style.top = visibleHeight + "px";
             intro.style.visibility = "hidden";
             list.style.opacity = 1;
         }
