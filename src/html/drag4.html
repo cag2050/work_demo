@@ -13,43 +13,30 @@
         }
 
         #list {
+            height: 100%;
+            /*overflow: visible;*/
             z-index: 1;
-            opacity: 1;
-        }
-
-        #video_intro {
+            opacity: 0;
         }
 
         #block {
             width: 100%;
             /*height: 56.25%;*/
-            visibility: hidden;
             right: 0;
             box-sizing: border-box;
             background-color: black;
             position: absolute;
-            /*z-index: 2;*/
+            z-index: 2;
         }
 
         #intro {
-            display: none;
-            /*height: 100%;*/
-            /*z-index: 2;*/
+            z-index: 2;
             position: absolute;
         }
-
     </style>
-    <script src="../js/lib/jquery.min.js"></script>
-    <script src="../js/lib/touch.js"></script>
 </head>
 <body>
 <div id="list">
-    <a id="a1"><img src="../images/le.png" style="width:100%;height:auto;"><br>
-        <div style="padding-left: 40%;">乐视宣传片</div>
-    </a><br>
-    <a id="a2"><img src="../images/greatwall.png" style="width:100%;height:auto;"><br>
-        <div style="padding-left: 30%;">电影长城宣传片</div>
-    </a><br>
     touchstart,touchmove<br/>
     touchend,touchcancel<br/>
     touchstart,touchmove<br/>
@@ -104,11 +91,11 @@
 <div id="video_intro">
     <!--<video id="block" style="width: 100%;height: 56.25%;top: 0;" controls>-->
     <video id="block" style="width: 100%;top: 0;" controls>
-        <source id="source1" src="../video/le.mp4" type="video/mp4"/>
+        <source src="../video/le.mp4" type="video/mp4"/>
         您的浏览器不支持Html5的video标签。请更换别的浏览器。
     </video>
     <div id="intro">
-        111视频介绍视频介绍视频绍视频介绍1视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
+        111视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍1视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
         222绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
         333绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
         444绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介绍视频介
@@ -122,60 +109,33 @@
     </div>
 </div>
 
-<div id='hello'></div>
-
 <script>
     var block = document.getElementById("block");
-    var source1 = document.getElementById("source1");
     var list = document.getElementById("list");
     var intro = document.getElementById("intro");
-    var a1 = document.getElementById('a1');
-    var a2 = document.getElementById('a2');
     var oW, oH; // 点击位置到元素左侧/顶部距离
     var visibleWidth = document.documentElement.clientWidth;
     var visibleHeight = document.documentElement.clientHeight;
     var introTop = block.offsetHeight;
     intro.style.top = introTop + block.offsetTop + 10 + "px";
+    //    console.log(intro.style.top);
     var ratio = 9 / 16;
     var oTop = 0;
     var endPercentWidth = 50; // 视频在右下角时所占的百分比数值,比如:30
-    var endBottom = 7; // 视频在右下角时距屏幕底部距离,比如:5
-    var endRight = 7; // 视频在右下角时距屏幕右部距离,比如:5
-
-    $("#hello").bind("jeff", function () {
-        list.style.opacity = 1;
-        document.removeEventListener("touchmove", _preventDefault);
-        if (block.offsetTop < screen.height / 3) {
-            block.style = 'top:0;visibility:visible;';
-            intro.style.top = block.offsetHeight + 10 + "px";
-            list.style.opacity = 0;
-            window.scrollTo(0, 0);
-        }
-        else {
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;";
-            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;position:fixed;";
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
-//            intro.style.top = block.offsetHeight + 10 + oTop + "px";
-//            intro.style.top = visibleHeight + "px";
-            intro.style.display = "none";
-            list.style.opacity = 1;
-        }
-    });
-
+    var endBottom = 5; // 视频在右下角时距屏幕底部距离,比如:5
+    var endRight = 5; // 视频在右下角时距屏幕右部距离,比如:5
     block.addEventListener("touchstart", function (e) {
-//        _preventDefault(e);
-//        event.preventDefault();
         intro.style.display = "block";
         intro.style.top = block.offsetHeight + block.offsetTop + 10 + "px";
+        console.log(intro.style.top);
         var touches = e.touches[0];
         oW = touches.clientX - block.offsetLeft; // 点击位置到元素左侧距离 = 点击位置距左侧距离-元素距左侧距离位置
         oH = touches.clientY - block.offsetTop;
         document.addEventListener("touchmove", _preventDefault);
-    }, false);
-
+    });
     block.addEventListener("touchmove", function (e) {
-//        event.preventDefault();
-//        _preventDefault(e);
+        _preventDefault(e);
+//        list.style.opacity = 0.2;
         var touches = e.touches[0];
         var oLeft = touches.clientX - oW; // 元素距左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
         oTop = touches.clientY - oH; // 元素距顶部距离
@@ -189,7 +149,6 @@
         } else if (oTop > visibleHeight - block.offsetHeight) {
             oTop = (visibleHeight - block.offsetHeight - 5);
         }
-
         block.style.top = oTop + "px";
         // 计算video的百分比宽度
         // 100 - (100 -最后变成的百分比数值) * video距顶距离 / (屏幕高度-视频高度-视频在右下角时距屏幕底部距离)
@@ -206,41 +165,48 @@
         block.style.width = changingWidth + '%';
 //        block.style.height = ratio * changingWidth + '%';
         intro.style.top = block.offsetHeight + 10 + oTop + "px";
-
-//        setTimeout(function () {
-//            $("#hello").trigger('jeff');
-//        }, 100);
-
-
-//        block.trigger('touchend');
-//        event.preventDefault();
-//        alert('fuck me');
-    }, false);
-
+    });
     block.addEventListener("touchend", function () {
         list.style.opacity = 1;
         document.removeEventListener("touchmove", _preventDefault);
         if (block.offsetTop < screen.height / 3) {
-            block.style = 'top:0;visibility:visible;';
+//            block.style = 'top:0;position:fixed;';
+            block.style = 'top:0;';
             intro.style.top = block.offsetHeight + 10 + "px";
             list.style.opacity = 0;
-            window.scrollTo(0, 0);
         }
         else {
-            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;position:fixed;";
+//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;";
+            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;position:fixed;";
 //            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
+            intro.style.top = block.offsetHeight + 10 + oTop + "px"
+//            console.log(block.offsetHeight);
+//            console.log(oTop);
+//            console.log(intro.style.top);
+//            intro.style.top = visibleHeight + "px";
             intro.style.display = "none";
             list.style.opacity = 1;
         }
-    }, false);
-
-
+    });
     function orientationChange() {
+//        alert('"onorientationchange" in window = ');
+//        alert("onorientationchange" in window);
         switch (window.orientation) {
             case 90:
             case -90:
                 console.log("横屏");
+//                block.style = "width:100%;height:100%;top:0;";
+//                intro.style.visibility = "hidden";
+//                list.style.visibility = "hidden";
+//                block.webkitRequestFullScreen();
                 setTimeout(function () {
+//                    list.style.visibility = "hidden";
+//                    intro.style.visibility = "hidden";
+//                    block.style = "width:100%;height:100%;top:0;";
+//                    block.removeEventListener("touchstart", _preventDefault);
+//                    block.removeEventListener("touchmove", _preventDefault);
+//                    block.removeEventListener("touchend", _preventDefault);
+                    console.log("横屏");
                     var videoHeight1 = block.offsetHeight;
                     intro.style.top = videoHeight1 + 10 + "px";
                 }, 200);
@@ -248,34 +214,25 @@
             default:
                 setTimeout(function () {
                     console.log("竖屏");
+//                    console.log(block.style.bottom);
+//                    if(block.style.bottom == '5px') {
+//                        console.log(111);
+//                    }
+//                block.style = "width:100%;height:auto;top:0;";
+//                block.style = "width:100%;height:auto;bottom:5px;";
+//                intro.style.visibility = "visible";
+//                list.style.visibility = "visible";
+//                    list.style.visibility = "visible";
+//                    intro.style.visibility = "visible";
+//                    block.style = "width:100%;";
                     var videoHeight2 = block.offsetHeight;
+//                    alert(videoHeight2 + 10);
                     intro.style.top = videoHeight2 + 10 + "px";
                 }, 200);
                 break;
         }
     }
-
     window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange);
-
-    $("#a1").on('tap', function () {
-//        window.scrollTo(0, 0);
-        block.style = "visibility:visible;width:100%;top:0;";
-//        source1.src = '../video/le.mp4';
-        var top = block.offsetHeight + 10;
-        intro.style = "display:block;width:100%;top:" + top + "px;";
-        list.style.opacity = '0';
-
-    });
-    $("#a2").on('tap', function () {
-        window.scrollTo(0, 0);
-        block.style = "visibility:visible;width:100%;top:0;";
-//        source1.src = '../video/greatwall.mp4';
-        var top = block.offsetHeight + 10;
-        intro.style = "display:block;width:100%;top:" + top + "px;";
-        list.style.opacity = '0';
-
-    });
-
     function _preventDefault(e) {
         e.preventDefault();
     }
