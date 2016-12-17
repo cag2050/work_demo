@@ -122,8 +122,6 @@
     </div>
 </div>
 
-<div id='hello'></div>
-
 <script>
     var block = document.getElementById("block");
     var source1 = document.getElementById("source1");
@@ -141,26 +139,6 @@
     var endPercentWidth = 50; // 视频在右下角时所占的百分比数值,比如:30
     var endBottom = 7; // 视频在右下角时距屏幕底部距离,比如:5
     var endRight = 7; // 视频在右下角时距屏幕右部距离,比如:5
-
-    $("#hello").bind("jeff", function () {
-        list.style.opacity = 1;
-        document.removeEventListener("touchmove", _preventDefault);
-        if (block.offsetTop < screen.height / 3) {
-            block.style = 'top:0;visibility:visible;';
-            intro.style.top = block.offsetHeight + 10 + "px";
-            list.style.opacity = 0;
-            window.scrollTo(0, 0);
-        }
-        else {
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;";
-            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;position:fixed;";
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
-//            intro.style.top = block.offsetHeight + 10 + oTop + "px";
-//            intro.style.top = visibleHeight + "px";
-            intro.style.display = "none";
-            list.style.opacity = 1;
-        }
-    });
 
     block.addEventListener("touchstart", function (e) {
 //        _preventDefault(e);
@@ -181,13 +159,13 @@
         oTop = touches.clientY - oH; // 元素距顶部距离
         if (oLeft < 0) {
             oLeft = 0;
-        } else if (oLeft > visibleWidth - block.offsetWidth) {
-            oLeft = (visibleWidth - block.offsetWidth);
+        } else if (oLeft > visibleWidth - block.offsetWidth - endRight) {
+            oLeft = (visibleWidth - block.offsetWidth - endRight);
         }
         if (oTop < 0) {
             oTop = 0;
-        } else if (oTop > visibleHeight - block.offsetHeight) {
-            oTop = (visibleHeight - block.offsetHeight - 5);
+        } else if (oTop > visibleHeight - block.offsetHeight - endBottom) {
+            oTop = (visibleHeight - block.offsetHeight - endBottom);
         }
 
         block.style.top = oTop + "px";
@@ -206,15 +184,6 @@
         block.style.width = changingWidth + '%';
 //        block.style.height = ratio * changingWidth + '%';
         intro.style.top = block.offsetHeight + 10 + oTop + "px";
-
-//        setTimeout(function () {
-//            $("#hello").trigger('jeff');
-//        }, 100);
-
-
-//        block.trigger('touchend');
-//        event.preventDefault();
-//        alert('fuck me');
     }, false);
 
     block.addEventListener("touchend", function () {
@@ -258,7 +227,7 @@
     window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange);
 
     $("#a1").on('tap', function () {
-//        window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         block.style = "visibility:visible;width:100%;top:0;";
 //        source1.src = '../video/le.mp4';
         var top = block.offsetHeight + 10;
