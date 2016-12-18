@@ -6,9 +6,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <style>
-        div {
-            /*-webkit-overflow-scrolling: touch;*/
-        }
         html, body {
             width: 100%;
             margin: 0;
@@ -16,7 +13,7 @@
         }
 
         #list {
-            /*z-index: 1;*/
+            z-index: 1;
             opacity: 1;
         }
 
@@ -31,13 +28,13 @@
             box-sizing: border-box;
             background-color: black;
             position: absolute;
-            z-index: 2;
+            /*z-index: 1;*/
         }
 
         #intro {
             display: none;
             /*height: 100%;*/
-            z-index: 2;
+            /*z-index: 1;*/
             position: absolute;
         }
 
@@ -47,7 +44,7 @@
 </head>
 <body>
 <div id="list">
-    <a id="a1"><img id="img1" src="../images/le.png" style="width:100%;height:auto;"><br>
+    <a id="a1"><img src="../images/le.png" style="width:100%;height:auto;"><br>
         <div style="padding-left: 40%;">乐视宣传片</div>
     </a><br>
     <a id="a2"><img src="../images/greatwall.png" style="width:100%;height:auto;"><br>
@@ -107,7 +104,7 @@
 <div id="video_intro">
     <!--<video id="block" style="width: 100%;height: 56.25%;top: 0;" controls>-->
     <video id="block" style="width: 100%;top: 0;" controls>
-        <source id="source1" src="../video/greatwall.mp4" type="video/mp4"/>
+        <source id="source1" src="../video/le.mp4" type="video/mp4"/>
         您的浏览器不支持Html5的video标签。请更换别的浏览器。
     </video>
     <div id="intro">
@@ -143,23 +140,19 @@
     var endBottom = 7; // 视频在右下角时距屏幕底部距离,比如:5
     var endRight = 7; // 视频在右下角时距屏幕右部距离,比如:5
 
-    block.addEventListener("touchstart", function (e) {
-//        _preventDefault(e);
-//        event.preventDefault();
-//        block.style.position = "absolute";
+    block.addEventListener("touchstart", function (ev) {
         intro.style.display = "block";
         intro.style.top = block.offsetHeight + block.offsetTop + 10 + "px";
-        var touches = e.touches[0];
+        var touches = ev.touches[0];
         oW = touches.clientX - block.offsetLeft; // 点击位置到元素左侧距离 = 点击位置距左侧距离-元素距左侧距离位置
         oH = touches.clientY - block.offsetTop;
-        document.addEventListener("touchmove", _preventDefault);
+        document.addEventListener("touchmove", function (e) {
+            e.preventDefault();
+        });
     }, false);
 
-    block.addEventListener("touchmove", function (e) {
-//        block.style.position = "absolute";
-        e.preventDefault();
-//        _preventDefault(e);
-        var touches = e.touches[0];
+    block.addEventListener("touchmove", function (ev) {
+        var touches = ev.touches[0];
         var oLeft = touches.clientX - oW; // 元素距左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
         oTop = touches.clientY - oH; // 元素距顶部距离
         if (oLeft < 0) {
@@ -191,9 +184,11 @@
         intro.style.top = block.offsetHeight + 10 + oTop + "px";
     }, false);
 
-    block.addEventListener("touchend", function () {
+    block.addEventListener("touchend", function (ev) {
         list.style.opacity = 1;
-        document.removeEventListener("touchmove", _preventDefault);
+        document.removeEventListener("touchmove", function (e) {
+            e.preventDefault();
+        });
         if (block.offsetTop < screen.height / 3) {
             block.style = 'top:0;visibility:visible;';
             intro.style.top = block.offsetHeight + 10 + "px";
@@ -202,25 +197,6 @@
         }
         else {
             block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;position:fixed;";
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;";
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
-            intro.style.display = "none";
-            list.style.opacity = 1;
-        }
-    }, false);
-
-    block.addEventListener("touchend", function () {
-        list.style.opacity = 1;
-        document.removeEventListener("touchmove", _preventDefault);
-        if (block.offsetTop < screen.height / 3) {
-            block.style = 'top:0;visibility:visible;';
-            intro.style.top = block.offsetHeight + 10 + "px";
-            list.style.opacity = 0;
-            window.scrollTo(0, 0);
-        }
-        else {
-            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;position:fixed;";
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;";
 //            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
             intro.style.display = "none";
             list.style.opacity = 1;
@@ -250,17 +226,14 @@
 
     window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange);
 
-    $("#img1").tap(function () {
-
-//        window.scrollTo(0, 0);
-        block.style = "visibility:visible;width:100%;top:0;display:block;";
-//        block.style = "visibility:visible;width:100%;top:0;";
+    $("#a1").tap(function () {
+        window.scrollTo(0, 0);
+        block.style = "visibility:visible;width:100%;top:0;";
 //        source1.src = '../video/le.mp4';
         var top = block.offsetHeight + 10;
-//        intro.style = "display:block;width:100%;top:" + top + "px;";
-        intro.style = "display:block;visibility:visible;width:100%;top:" + top + "px;";
+        intro.style = "display:block;width:100%;top:" + top + "px;";
         list.style.opacity = '0';
-//        alert(444);
+        alert(111);
     });
     $("#a2").on('tap', function () {
         window.scrollTo(0, 0);
@@ -269,11 +242,9 @@
         var top = block.offsetHeight + 10;
         intro.style = "display:block;width:100%;top:" + top + "px;";
         list.style.opacity = '0';
+//        alert(222);
     });
 
-    function _preventDefault(e) {
-        e.preventDefault();
-    }
 </script>
 </body>
 </html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+
+<table style="width:300px;border:1px solid gray;" id="table1">
+    <tr>
+        <td style="align:center;">浏览器名称</td>
+        <td style="align:center;">所占百分比</td>
+    </tr>
+</table>
+<script>
+    var table1 = $("#table1");
+    var browser_cv = {
+        chrome: 1019617,
+        qq: 364608,
+        safari: 235561,
+        手机百度: 330136,
+        uc: 376774,
+        微信: 218240,
+        QQLive浏览器: 119544,
+        高速: 25428,
+        乐视手机浏览器: 6201,
+        OPPO手机浏览器: 79549,
+        微博: 106453,
+        暴风影音: 3662,
+        百度浏览器: 21804,
+        小米手机: 15290,
+        搜狗手机浏览器: 5170,
+        火狐: 145
+    };
+    var cv_sum = 0;
+    for (var x in browser_cv) {
+        cv_sum += browser_cv[x];
+    }
+    console.log('vv总和:' + cv_sum);
+    for (var x in browser_cv) {
+        console.log(x + ":" + browser_cv[x]);
+    }
+    for (var x in browser_cv) {
+        console.log(x + ":" + (browser_cv[x] / cv_sum).toFixed(4));
+    }
+    for (var x in browser_cv) {
+        if ((browser_cv[x] / cv_sum).toFixed(4).slice(2, 3) == 0) {
+            console.log(x + ":" + (browser_cv[x] / cv_sum).toFixed(4).slice(3, 4) + '.'
+                    + (browser_cv[x] / cv_sum).toFixed(4).slice(4, 6) + '%');
+            table1.append('<tr><td>' + x + '</td><td>' + (browser_cv[x] / cv_sum).toFixed(4).slice(3, 4) + '.'
+                    + (browser_cv[x] / cv_sum).toFixed(4).slice(4, 6) + '%' + '</td></tr>');
+        }
+        else {
+            console.log(x + ":" + (browser_cv[x] / cv_sum).toFixed(4).slice(2, 4) + '.'
+                    + (browser_cv[x] / cv_sum).toFixed(4).slice(4, 6) + '%');
+            table1.append('<tr><td>' + x + '</td><td>' + (browser_cv[x] / cv_sum).toFixed(4).slice(2, 4) + '.'
+                    + (browser_cv[x] / cv_sum).toFixed(4).slice(4, 6) + '%' + '</td></tr>');
+        }
+
+    }
+</script>
+</body>
+</html>
