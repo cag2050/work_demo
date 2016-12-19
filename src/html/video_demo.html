@@ -2,21 +2,24 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>播放器小窗续播功能demo</title>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <style>
         div {
             /*-webkit-overflow-scrolling: touch;*/
         }
+
         html, body {
             width: 100%;
+            height: 100%;
+            overflow: auto;
             margin: 0;
             padding: 0;
         }
 
         #list {
-            /*z-index: 1;*/
+            z-index: 1;
             opacity: 1;
         }
 
@@ -30,13 +33,13 @@
             right: 0;
             box-sizing: border-box;
             background-color: black;
-            position: absolute;
-            z-index: 2;
+            position: fixed;
+            /*position: absolute;*/
+            z-index: 3;
         }
 
         #intro {
             display: none;
-            /*height: 100%;*/
             z-index: 2;
             position: absolute;
         }
@@ -105,7 +108,6 @@
     touchend,touchcancel3333333333333333333333
 </div>
 <div id="video_intro">
-    <!--<video id="block" style="width: 100%;height: 56.25%;top: 0;" controls>-->
     <video id="block" style="width: 100%;top: 0;" controls>
         <source id="source1" src="../video/greatwall.mp4" type="video/mp4"/>
         您的浏览器不支持Html5的video标签。请更换别的浏览器。
@@ -144,9 +146,6 @@
     var endRight = 7; // 视频在右下角时距屏幕右部距离,比如:5
 
     block.addEventListener("touchstart", function (e) {
-//        _preventDefault(e);
-//        event.preventDefault();
-//        block.style.position = "absolute";
         intro.style.display = "block";
         intro.style.top = block.offsetHeight + block.offsetTop + 10 + "px";
         var touches = e.touches[0];
@@ -156,9 +155,6 @@
     }, false);
 
     block.addEventListener("touchmove", function (e) {
-//        block.style.position = "absolute";
-        e.preventDefault();
-//        _preventDefault(e);
         var touches = e.touches[0];
         var oLeft = touches.clientX - oW; // 元素距左侧距离 = 点击位置距左侧距离-点击位置到元素左侧距离
         oTop = touches.clientY - oH; // 元素距顶部距离
@@ -194,39 +190,29 @@
     block.addEventListener("touchend", function () {
         list.style.opacity = 1;
         document.removeEventListener("touchmove", _preventDefault);
-        if (block.offsetTop < screen.height / 3) {
-            block.style = 'top:0;visibility:visible;';
+//        if (block.offsetTop < screen.height / 3) {
+        if (block.offsetTop < visibleHeight / 3) {
+//            block.style = 'top:0;visibility:visible;';
+            block.style.visibility = "visible";
+            block.style.width = "100%";
+            block.style.top = "0";
             intro.style.top = block.offsetHeight + 10 + "px";
             list.style.opacity = 0;
             window.scrollTo(0, 0);
         }
-        else {
-            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;position:fixed;";
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;";
+        if (block.offsetTop >= visibleHeight / 3) {
+//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;position:fixed;";
+            block.style.width = endPercentWidth + "%";
+            block.style.top = "";
+            block.style.bottom = endBottom + "px";
+            block.style.right = endRight + "px";
+            block.style.visibility = "visible";
+            block.style.position = "fixed";
 //            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
             intro.style.display = "none";
             list.style.opacity = 1;
         }
     }, false);
-
-    block.addEventListener("touchend", function () {
-        list.style.opacity = 1;
-        document.removeEventListener("touchmove", _preventDefault);
-        if (block.offsetTop < screen.height / 3) {
-            block.style = 'top:0;visibility:visible;';
-            intro.style.top = block.offsetHeight + 10 + "px";
-            list.style.opacity = 0;
-            window.scrollTo(0, 0);
-        }
-        else {
-            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;position:fixed;";
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;visibility:visible;";
-//            block.style = "width:" + endPercentWidth + "%;bottom:" + endBottom + "px;right:" + endRight + "px;height:" + ratio * 70 + '%';
-            intro.style.display = "none";
-            list.style.opacity = 1;
-        }
-    }, false);
-
 
     function orientationChange() {
         switch (window.orientation) {
@@ -250,24 +236,34 @@
 
     window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", orientationChange);
 
-    $("#img1").tap(function () {
-
-//        window.scrollTo(0, 0);
-        block.style = "visibility:visible;width:100%;top:0;display:block;";
+    $("#a1").on("tap", function () {
+        //        window.scrollTo(0, 0);
 //        block.style = "visibility:visible;width:100%;top:0;";
-//        source1.src = '../video/le.mp4';
+        block.style.visibility = "visible";
+        block.style.width = "100%";
+        block.style.top = "0";
+        //        source1.src = '../video/le.mp4';
         var top = block.offsetHeight + 10;
 //        intro.style = "display:block;width:100%;top:" + top + "px;";
-        intro.style = "display:block;visibility:visible;width:100%;top:" + top + "px;";
+        intro.style.display = "block";
+        intro.style.width = "100%";
+        intro.style.top = top + "px";
         list.style.opacity = '0';
-//        alert(444);
-    });
+        list.style.filter = 'alpha(opacity=0)';
+    })
+    ;
     $("#a2").on('tap', function () {
         window.scrollTo(0, 0);
-        block.style = "visibility:visible;width:100%;top:0;";
+//        block.style = "visibility:visible;width:100%;top:0;";
+        block.style.visibility = "visible";
+        block.style.width = "100%";
+        block.style.top = "0";
 //        source1.src = '../video/greatwall.mp4';
         var top = block.offsetHeight + 10;
-        intro.style = "display:block;width:100%;top:" + top + "px;";
+//        intro.style = "display:block;width:100%;top:" + top + "px;";
+        intro.style.display = "block";
+        intro.style.width = "100%";
+        intro.style.top = top + "px";
         list.style.opacity = '0';
     });
 

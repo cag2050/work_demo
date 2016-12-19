@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <title>2个不同z-index的div,高度如何确定的?</title>
     <style>
-        .div1 {
+        #div1 {
             position: absolute;
             z-index: 1;
 
         }
 
-        .div2 {
+        #div2 {
             position: absolute;
             z-index: 2;
-            top: 100px;
+            top: 500px;
         }
     </style>
 </head>
 <body>
-<button onclick="document.getElementsByClassName('div2').style.display='none'">显示div1</button>
-<div class="div1">
+<button onclick="document.getElementById('div2').style.display='none'">隐藏div2</button>
+<button onclick="document.getElementById('div2').style.display='block'">显示div2</button>
+<div id="div1">
     第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div
     第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div
     第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div
@@ -54,7 +55,7 @@
     第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div
     第一个div第一个div第一个div第一个div第一个div第一个div第一个div第一个div
 </div>
-<div class="div2">
+<div id="div2">
     第二个div第二个div第二个div第二个div第二个div第二个div第二个divßdiv第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div
     第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div
     第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div第二个div
