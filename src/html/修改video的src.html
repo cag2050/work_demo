@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+<button id="btn1" style="height:100px;">改变video1的src地址</button>
+<button id="btn2" style="height:100px;">改变video2的src地址</button>
+<video id="video1" style="width: 100%;top: 0;" controls>
+    <source id="source1" src="../video/le.mp4" type="video/mp4"/>
+    您的浏览器不支持Html5的video标签。请更换别的浏览器。
+</video>
+<video id="video2" src="../video/le.mp4" style="width: 100%;top: 0;" controls>
+    <!--<source id="source2" src="../video/le.mp4" type="video/mp4"/>-->
+    您的浏览器不支持Html5的video标签。请更换别的浏览器。
+</video>
+<script>
+    console.log($('#source1').attr('src'));
+
+    console.log($('#video2').attr('src'));
+
+    $("#btn1").on('click',function(){
+        $('#source1').attr('src','../video/greatwall.mp4');
+        $("#video1").attr('autoplay','true');
+    });
+    $("#btn2").on('click',function(){
+        $('#video2').attr('src','../video/greatwall.mp4');
+        $("#video2").attr('autoplay','true');
+    });
+</script>
+</body>
+</html>

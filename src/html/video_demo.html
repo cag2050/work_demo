@@ -10,6 +10,10 @@
             /*-webkit-overflow-scrolling: touch;*/
         }
 
+        video {
+            /*object-fit: none;*/
+        }
+
         html, body {
             width: 100%;
             height: 100%;
@@ -29,6 +33,7 @@
         #block {
             width: 100%;
             /*height: 56.25%;*/
+            /*height: 100%;*/
             visibility: hidden;
             right: 0;
             box-sizing: border-box;
@@ -108,8 +113,9 @@
     touchend,touchcancel3333333333333333333333
 </div>
 <div id="video_intro">
-    <video id="block" style="width: 100%;top: 0;" controls>
-        <source id="source1" src="../video/greatwall.mp4" type="video/mp4"/>
+    <video id="block" src="../video/le.mp4" style="width: 100%;top: 0;" controls autoplay="autoplay">
+    <!--<video id="block" style="width: 100%;top: 0;" controls>-->
+        <!--<source id="source1" src="../video/greatwall.mp4" type="video/mp4"/>-->
         您的浏览器不支持Html5的video标签。请更换别的浏览器。
     </video>
     <div id="intro">
@@ -239,11 +245,14 @@
     $("#a1").on("tap", function () {
         //        window.scrollTo(0, 0);
 //        block.style = "visibility:visible;width:100%;top:0;";
+
         block.style.visibility = "visible";
         block.style.width = "100%";
         block.style.top = "0";
-        //        source1.src = '../video/le.mp4';
+        $('#block').attr('src','../video/le.mp4');
+        $("#block").attr('autoplay','true');
         var top = block.offsetHeight + 10;
+        console.log(top);
 //        intro.style = "display:block;width:100%;top:" + top + "px;";
         intro.style.display = "block";
         intro.style.width = "100%";
@@ -258,12 +267,14 @@
         block.style.visibility = "visible";
         block.style.width = "100%";
         block.style.top = "0";
-//        source1.src = '../video/greatwall.mp4';
-        var top = block.offsetHeight + 10;
+        $('#block').attr('src','../video/greatwall.mp4');
+        $("#block").attr('autoplay','true');
+        var top = document.getElementById('block').offsetHeight + 10;
+        console.log(top);
 //        intro.style = "display:block;width:100%;top:" + top + "px;";
         intro.style.display = "block";
         intro.style.width = "100%";
-        intro.style.top = top + "px";
+        intro.style.top = "243px";
         list.style.opacity = '0';
     });
 
