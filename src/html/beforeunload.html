@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/lib/jquery.min.js"></script>
+</head>
+<body>
+<script>
+$(window).on('beforeunload',function () {
+    return '即将离开此页面';
+    console.log('即将离开此页面');
+})
+</script>
+测试beforeunload
+</body>
+</html>
