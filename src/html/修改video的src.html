@@ -12,7 +12,7 @@
     <source id="source1" src="../video/le.mp4" type="video/mp4"/>
     您的浏览器不支持Html5的video标签。请更换别的浏览器。
 </video>
-<video id="video2" src="../video/le.mp4" style="width: 100%;top: 0;" controls>
+<video id="video2" src="../video/greatwall.mp4" style="width: 100%;top: 0;" controls>
     <!--<source id="source2" src="../video/le.mp4" type="video/mp4"/>-->
     您的浏览器不支持Html5的video标签。请更换别的浏览器。
 </video>
@@ -21,14 +21,31 @@
 
     console.log($('#video2').attr('src'));
 
-    $("#btn1").on('click',function(){
-        $('#source1').attr('src','../video/greatwall.mp4');
-        $("#video1").attr('autoplay','true');
+    $("#btn1").on('click', function () {
+        $('#source1').attr('src', '../video/greatwall.mp4');
+        $("#video1").attr('autoplay', 'true');
     });
-    $("#btn2").on('click',function(){
-        $('#video2').attr('src','../video/greatwall.mp4');
-        $("#video2").attr('autoplay','true');
+    $("#btn2").on('click', function () {
+        $('#video2').attr('src', '../video/greatwall.mp4');
+        $("#video2").attr('autoplay', 'true');
     });
+    var video1 = document.getElementById('video1');
+    var video2 = document.getElementById('video2');
+//    setInterval(function () {
+    setTimeout(function () {
+        console.log('video1.width = ' + video1.width);
+        console.log('video1.videoWidth = ' + video1.videoWidth);
+        console.log('video1.height = ' + video1.height);
+        console.log('video1.videoHeight = ' + video1.videoHeight);
+        console.log('video1.offsetHeight = ' + video1.offsetHeight);
+
+        console.log('video2.width = ' + video2.width);
+        console.log('video2.videoWidth = ' + video2.videoWidth);
+        console.log('video2.height = ' + video2.height);
+        console.log('video2.videoHeight = ' + video2.videoHeight);
+        console.log('video2.offsetHeight = ' + video2.offsetHeight);
+    }, 500);
+
 </script>
 </body>
 </html>

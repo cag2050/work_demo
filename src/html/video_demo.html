@@ -113,7 +113,7 @@
     touchend,touchcancel3333333333333333333333
 </div>
 <div id="video_intro">
-    <video id="block" src="../video/le.mp4" style="width: 100%;top: 0;" controls autoplay="autoplay">
+    <video id="block" src="../video/le.mp4" style="width: 100%;top: 0;" controls>
     <!--<video id="block" style="width: 100%;top: 0;" controls>-->
         <!--<source id="source1" src="../video/greatwall.mp4" type="video/mp4"/>-->
         您的浏览器不支持Html5的video标签。请更换别的浏览器。
@@ -188,6 +188,7 @@
         // 计算video在滑动过程中距底部距离
         // 视频在右下角时距屏幕底部距离 * video距顶距离 / (屏幕高度-视频高度-视频在右下角时距屏幕底部距离)
         block.style.bottom = endBottom * oTop / (visibleHeight - block.offsetHeight - endBottom) + 'px';
+        console.log(block.style.bottom);
         block.style.width = changingWidth + '%';
 //        block.style.height = ratio * changingWidth + '%';
         intro.style.top = block.offsetHeight + 10 + oTop + "px";
