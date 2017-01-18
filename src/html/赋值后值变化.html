@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 保存基本类型的变量，变量是按值访问的，因为我们操作的是变量实际保存的值。
+    var str1 = 'str1';
+    var str2 = str1;
+    str1 = 'str11';
+    console.log(str2); // 输出:str2
+
+    // 保存引用类型的变量，变量是按引用访问的，我们操作的是变量值所引用（指向）的对象.
+    var obj1 = {
+        name: 'obj1'
+    };
+    var obj2 = obj1;
+    obj1.name = 'obj11';
+//    obj2.name = 'obj2';
+    console.log(obj2.name); //ß
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1 {
+            width: 350px;
+            height: 460px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+            float: left;
+        }
+
+        #div2 {
+            float: left;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+图片可以拖到左边矩形框内<br>
+<div id="div1" ondrop="_drop(event)"
+     ondragover="_dragover(event)"></div>
+<div id="div2"><img id="drag1" src="../images/liying.jpg" draggable="true"
+                    ondragstart="_dragstart(event)" width="323" height="440"/></div>
+<script type="text/javascript">
+    function _dragover(ev) {
+        ev.preventDefault();
+    }
+    function _dragstart(ev) {
+        ev.dataTransfer.setData("Text", ev.target.id);
+    }
+    function _drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+</script>
+</body>
+</html>

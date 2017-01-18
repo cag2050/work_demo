@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var time = function (time, timeFormat) {
+        if (typeof time === 'number') {
+            time = new Date(time);
+        } else if (typeof time === 'string') {
+            time = new Date(Date.parse(time.replace(/-/g, '/')));
+        }
+
+        var t = {};
+        t.YYYY = time.getFullYear();
+        t.m = time.getMonth() + 1;
+        t.D = time.getDate();
+        t.H = time.getHours();
+        t.M = time.getMinutes();
+        t.S = time.getSeconds();
+        t.mm = t.m > 9 ? t.m : '0' + t.m;
+        t.DD = t.D > 9 ? t.D : '0' + t.D;
+        t.HH = t.H > 9 ? t.H : '0' + t.H;
+        t.MM = t.M > 9 ? t.M : '0' + t.M;
+        t.SS = t.S > 9 ? t.S : '0' + t.S;
+
+        return timeFormat.replace(/\b[YmDHMS]+\b/g, function ($0) {
+            return t[$0] || '';
+        });
+    }
+    var handleDate = function (mstime) {
+        var MS24H = 24 * 60 * 60 * 1000;//24小时的毫秒
+        var MS01H = 1 * 60 * 60 * 1000;//一小时的毫秒
+        var MS01M = 1 * 60 * 1000;//一分钟的毫秒
+        var now = Date.now();
+        var minus = now - mstime;//毫秒
+        var re = "";
+        if (minus >= MS24H) {//24小时之前
+            re = time(mstime, 'YYYY-mm-DD');
+            // re = mstime;
+        } else if (minus >= MS01H) {//24小时与一小时之间
+            re = Math.floor(minus / (1000 * 60 * 60)) + "小时前";
+        } else if (minus >= MS01M) {//一小时与一分钟之间
+            re = Math.floor(minus / (1000 * 60)) + "分钟前";
+        } else {
+            re = '1分钟内';
+        }
+        return re;
+    };
+
+    document.write(handleDate(1473026880000));
+</script>
+</body>
+</html>

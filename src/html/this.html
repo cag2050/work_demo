@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    console.log('外面的this = window')
+    console.log(this)
+    var obj = {
+        fun1: function () {
+            console.log('对象里函数的this = 对象');
+            console.log(this);
+        }
+    }
+    obj.fun1();
+</script>
+
+</body>
+</html>

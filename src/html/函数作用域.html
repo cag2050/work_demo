@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var str = 'hello';
+    function test() {
+        console.log(str); // 输出:undefined. 下一行声明了变量,预编译时声明提前;只声明,没赋值,所以是undefined
+        var str = 'world'; //  变量同名,函数内,局部变量覆盖全局变量;为什么会覆盖全局变量,因为js的链式作用域
+        console.log(str); // 输出:world
+    }
+    test();
+    console.log(str); // 输出:hello. 不在函数内,是访问全局变量.
+</script>
+</body>
+</html>
